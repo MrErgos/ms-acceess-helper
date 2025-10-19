@@ -1,0 +1,42 @@
+Член НКСО - Member of the National Board of Appraisers - MemberNkso
+№_По_Реестру - No. in the Register - Registry Number - registryNum
+Дата_Вкл_В_Реестр_(сокр) - Date_Included_in_Register_(abbreviation) - Date_Added_to_Registry_(abbr.) - dateAddedToRegistry
+(Т) Дата_Вкл_В_Реестр_(сокр) - Date_Added_to_Registry_(abbr.) in text - textDateAddedToRegistry
+Дата_Вкл_В_Реестр_(полн) - Date_Added_to_Register_(full) in text - fullTextDateAddedToRegistry
+Субъект_РФ - Subject_RF - subjectRf
+Город - City - city
+Регион_Партнёрство - Region_Partnership - regionPartnership
+Код_РП - RP_Code - rpCode
+Фамилия - Last name - lastname
+Имя - First name - firstname
+Отчество - Middle name - middlename
+Дата_Рождения - Date of Birth - dateOfBirth
+Место_Рождения - Place_of_Birth - birthPlace
+ИНН - TIN - tin
+СНИЛС - Social Security Number - ssn
+Членство_В_РП — Membership in RP — membershipInRp
+Регистр_№_в_РП — Register No. in RP — registerNumInRp
+Дата_Вступл_Р_РП — Date of Joining RP — dateJoiningRp
+Дата_Искл_Из_Р_РП — Date of Exclusion from RP — dateExclusionFromRp
+Т_Общий_Трудовой_Стаж — Total Work Experience — totalWorkExperience
+Т_Оценочный_Трудовой_Стаж — Evaluated Work Experience — evaluatedWorkExperience
+Оценочный_Трудовой_Стаж — Assessment Work Experience — assessmentWorkExperience
+Паспорт — Passport — passport
+Адрес_Регистрации — Registration Address — registrationAddress
+Адрес_Корреспонденции — Correspondence Address — correspondenceAddress
+E-mail_члена_НКСО — Member Email NKSO — memberEmailNkso
+E-mail_члена_НКСО_2 — Member Email NKSO 2 — memberEmailNkso2
+Код_Города_Тел — City Phone Code — cityPhoneCode
+Тел_Контактный — Contact Phone — contactPhone
+Телефон_Моб — Mobile Phone — mobilePhone
+Текст_№_Справки_О_Судимостим — Certificate No. Criminal Record (Text) — textCertificateNumCriminalRecord
+№_Справки_О_Судимости — Certificate No. Criminal Record — certificateNumCriminalRecord
+Текст_Дата_Справки_О_Судимости — Certificate Date (Text) — textCertificateDateCriminalRecord
+Дата_Справки_О_Судимости — Certificate Date — certificateDateCriminalRecord
+Т_Дата_Справки_О_Судимости — Certificate Date (T) — tCertificateDateCriminalRecord
+Дата_Изменения_в_Реестр_Члены — Date of Change in Register (Members) — dateChangeInRegisterMembers
+Дата_Изменениям_Члены — Date of Change (Members) — dateChangeMembers
+Дата_Изминение_Члены — Date of Modification (Members) — dateModificationMembers
+Необходимо_Изменит_Члены — Need to Change (Members) — needToChangeMembers
+Адекватность_Члена_НКСО — Adequacy of NKSO Member — adequacyNksoMember
+Примечание_о_Члене_НКСО — Note about NKSO Member — noteNksoMember

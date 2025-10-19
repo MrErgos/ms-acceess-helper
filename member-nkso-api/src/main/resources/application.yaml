@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: ms-access-helper-manager-app
+  datasource:
+    url: jdbc:ucanaccess://M:/project/db/bd_nkso.accdb;memory=false
+    driver-class-name: net.ucanaccess.jdbc.UcanaccessDriver
+    username:
+    password:
+  jpa:
+    hibernate:
+      globally_quoted_identifiers: false
+      auto_quote_keyword: false
+      ddl-auto: none
+    show-sql: true
+    database-platform: io.github.mrergos.dialect.MSAccessBracketDialect
+    properties:
+      hibernate.globally_quoted_identifiers: false
+      hibernate.auto_quote_keyword: false
+      hibernate:
+        dialect: io.github.mrergos.dialect.MSAccessBracketDialect
+server:
+  port: 8081
+logging:
+  level:
+    web: debug
