@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{members.title}">Члены НКСО</title>
+</head>
+<body>
+<h2 th:text="#{members.title}">Члены НКСО</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th th:text="#{member.registryNum}">№ По Реестру</th>
+        <th th:text="#{member.dateAddedToRegistry}">Дата Вкл В Реестр (сокр)</th>
+        <th th:text="#{member.textDateAddedToRegistry}">(Т) Дата Вкл В Реестр (сокр)</th>
+        <th th:text="#{member.fullTextDateAddedToRegistry}">Дата Вкл В Реестр (полн)</th>
+        <th th:text="#{member.subjectRf}">Субъект РФ</th>
+        <th th:text="#{member.city}">Город</th>
+        <th th:text="#{member.regionPartnership}">Регион Партнёрство</th>
+        <th th:text="#{member.rpCode}">Код РП</th>
+        <th th:text="#{member.lastname}">Фамилия</th>
+        <th th:text="#{member.firstname}">Имя</th>
+        <th th:text="#{member.middlename}">Отчество</th>
+        <th th:text="#{member.dateOfBirth}">Дата Рождения</th>
+        <th th:text="#{member.birthPlace}">Место Рождения</th>
+        <th th:text="#{member.tin}">ИНН</th>
+        <th th:text="#{member.ssn}">СНИЛС</th>
+        <th th:text="#{member.membershipInRp}">Членство В РП</th>
+        <th th:text="#{member.registerNumInRp}">Регистр № в РП</th>
+        <th th:text="#{member.dateJoiningRp}">Дата Вступл Р РП</th>
+        <th th:text="#{member.dateExclusionFromRp}">Дата Искл Из Р РП</th>
+        <th th:text="#{member.totalWorkExperience}">Т Общий Трудовой Стаж</th>
+        <th th:text="#{member.evaluatedWorkExperience}">Т Оценочный Трудовой Стаж</th>
+        <th th:text="#{member.assessmentWorkExperience}">Оценочный Трудовой Стаж</th>
+        <th th:text="#{member.passport}">Паспорт</th>
+        <th th:text="#{member.registrationAddress}">Адрес Регистрации</th>
+        <th th:text="#{member.correspondenceAddress}">Адрес Корреспонденции</th>
+        <th th:text="#{member.memberEmailNkso}">E-mail члена НКСО</th>
+        <th th:text="#{member.memberEmailNkso2}">E-mail члена НКСО 2</th>
+        <th th:text="#{member.cityPhoneCode}">Код Города Тел</th>
+        <th th:text="#{member.contactPhone}">Тел Контактный</th>
+        <th th:text="#{member.mobilePhone}">Телефон Моб</th>
+        <th th:text="#{member.textCertificateNumCriminalRecord}">Текст № Справки О Судимости</th>
+        <th th:text="#{member.certificateNumCriminalRecord}">№ Справки О Судимости</th>
+        <th th:text="#{member.textCertificateDateCriminalRecord}">Текст Дата Справки О Судимости</th>
+        <th th:text="#{member.certificateDateCriminalRecord}">Дата Справки О Судимости</th>
+        <th th:text="#{member.tCertificateDateCriminalRecord}">Т Дата Справки О Судимости</th>
+        <th th:text="#{member.dateChangeInRegisterMembers}">Дата Изменения в Реестр Члены</th>
+        <th th:text="#{member.dateChangeMembers}">Дата Изменениям Члены</th>
+        <th th:text="#{member.dateModificationMembers}">Дата Изминение Члены</th>
+        <th th:text="#{member.needToChangeMembers}">Необходимо Изменит Члены</th>
+        <th th:text="#{member.adequacyNksoMember}">Адекватность Члена НКСО</th>
+        <th th:text="#{member.noteNksoMember}">Примечание о Члене НКСО</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="member : ${members}"
+        th:attr="onclick=|window.location='@{/members/{registryNum}(registryNum=${member.registryNum})}'|"
+        style="cursor:pointer;">
+        <td th:text="${member.registryNum}"></td>
+        <td th:text="${member.dateAddedToRegistry}"></td>
+        <td th:text="${member.textDateAddedToRegistry}"></td>
+        <td th:text="${member.fullTextDateAddedToRegistry}"></td>
+        <td th:text="${member.subjectRf}"></td>
+        <td th:text="${member.city}"></td>
+        <td th:text="${member.regionPartnership}"></td>
+        <td th:text="${member.rpCode}"></td>
+        <td th:text="${member.lastname}"></td>
+        <td th:text="${member.firstname}"></td>
+        <td th:text="${member.middlename}"></td>
+        <td th:text="${member.dateOfBirth}"></td>
+        <td th:text="${member.birthPlace}"></td>
+        <td th:text="${member.tin}"></td>
+        <td th:text="${member.ssn}"></td>
+        <td th:text="${member.membershipInRp}"></td>
+        <td th:text="${member.registerNumInRp}"></td>
+        <td th:text="${member.dateJoiningRp}"></td>
+        <td th:text="${member.dateExclusionFromRp}"></td>
+        <td th:text="${member.totalWorkExperience}"></td>
+        <td th:text="${member.evaluatedWorkExperience}"></td>
+        <td th:text="${member.assessmentWorkExperience}"></td>
+        <td th:text="${member.passport}"></td>
+        <td th:text="${member.registrationAddress}"></td>
+        <td th:text="${member.correspondenceAddress}"></td>
+        <td th:text="${member.memberEmailNkso}"></td>
+        <td th:text="${member.memberEmailNkso2}"></td>
+        <td th:text="${member.cityPhoneCode}"></td>
+        <td th:text="${member.contactPhone}"></td>
+        <td th:text="${member.mobilePhone}"></td>
+        <td th:text="${member.textCertificateNumCriminalRecord}"></td>
+        <td th:text="${member.certificateNumCriminalRecord}"></td>
+        <td th:text="${member.textCertificateDateCriminalRecord}"></td>
+        <td th:text="${member.certificateDateCriminalRecord}"></td>
+        <td th:text="${member.tCertificateDateCriminalRecord}"></td>
+        <td th:text="${member.dateChangeInRegisterMembers}"></td>
+        <td th:text="${member.dateChangeMembers}"></td>
+        <td th:text="${member.dateModificationMembers}"></td>
+        <td th:text="${member.needToChangeMembers}"></td>
+        <td th:text="${member.adequacyNksoMember}"></td>
+        <td th:text="${member.noteNksoMember}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

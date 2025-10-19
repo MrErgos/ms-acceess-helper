@@ -1,0 +1,7 @@
+
+tr[onclick] {
+    transition: background 0.2s;
+}
+tr[onclick]:hover {
+    background: #f2f2f2;
+}
