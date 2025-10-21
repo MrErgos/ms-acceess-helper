@@ -1,6 +1,7 @@
 package io.github.mrergos.controller;
 
 import io.github.mrergos.client.MembersRestClient;
+import io.github.mrergos.client.exception.IllegalArgumentExceptionWithProblemDetail;
 import io.github.mrergos.entity.MemberNkso;
 import io.github.mrergos.util.Pair;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,57 @@ public class MemberController {
     @GetMapping("/{registryNum}")
     public String getMemberById(@PathVariable("registryNum") String registryNum,
             Model model) {
-        model.addAttribute("member", membersRestClient.findMemberById(registryNum));
+        MemberNkso member = membersRestClient.findMemberById(registryNum);
+        model.addAttribute("fields", membersRestClient.getAllFields(member));
+        model.addAttribute("member", member);
         return "member";
+    }
+
+    @GetMapping("/{registryNum}/edit")
+    public String getMemberEdit(@PathVariable("registryNum") String registryNum,
+            Model model) {
+        MemberNkso member = membersRestClient.findMemberById(registryNum);
+        model.addAttribute("fields", membersRestClient.getAllFields(member));
+        model.addAttribute("member", member);
+        model.addAttribute("saveIsSuccessful", false);
+        return "member_edit";
+    }
+
+    @PostMapping("/{registryNum}/edit")
+    public String editMemberEdit(MemberNkso member, Model model) {
+        MemberNkso updatedMember = membersRestClient.update(member);
+        model.addAttribute("member", updatedMember);
+        model.addAttribute("fields", membersRestClient.getAllFields(updatedMember));
+        model.addAttribute("saveIsSuccessful", true);
+        return "member_edit";
+    }
+
+    @GetMapping("/create")
+    public String createMember(Model model) {
+        model.addAttribute("fields", membersRestClient.getAllEmptyFields());
+        model.addAttribute("errors", null);
+        return "create_member";
+    }
+
+    @PostMapping("/create")
+    public String createMember(MemberNkso member) {
+        MemberNkso savedMember = membersRestClient.create(member);
+        return "redirect:/members/" + savedMember.registryNum();
+    }
+
+    @ExceptionHandler(IllegalArgumentExceptionWithProblemDetail.class)
+    public String handleIllegalArgumentExceptionWithProblemDetail(IllegalArgumentExceptionWithProblemDetail exception, Model model) {
+        model.addAttribute("fields", membersRestClient.getAllFields(exception.getMember()));
+
+        Map<String, String> errors = new HashMap<>();
+        if (exception.getProblemDetail().getProperties().get("errors") instanceof List list) {
+            list.forEach(stringStringLinkedHashMap -> {
+                if (stringStringLinkedHashMap instanceof LinkedHashMap map) {
+                    errors.put((String) map.get("first"), (String) map.get("second"));
+                }
+            });
+        }
+        model.addAttribute("errors", errors);
+        return "create_member";
     }
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание нового члена НКСО</title>
+</head>
+<body>
+<div th:insert="~{header :: header}"></div>
+<form th:action="@{/members/create}" th:method="post">
+    <div th:each="field : ${fields}">
+        <label th:for="${field.key}" th:text="#{'member.' + ${field.key}}">Название поля</label>
+        <input type="text" th:name="${field.key}" th:value="${field.value} ? ${field.value} : ''" />
+        <span th:if="${errors != null && errors.containsKey(field.key)}" th:text="${errors.get(field.key)}"></span>
+    </div>
+    <div>
+        <input type="submit" value="Сохранить" />
+    </div>
+</form>
+</body>
+</html>

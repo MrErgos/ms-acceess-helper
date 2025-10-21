@@ -5,6 +5,15 @@
     <title th:text="${member.firstname + ' ' + member.lastname}">Член НКСО</title>
 </head>
 <body>
-<h2 th:text="${member.firstname + ' ' + member.lastname}">Члены НКСО</h2>
+<div th:insert="~{header :: header}"></div>
+<table>
+    <tbody>
+    <tr th:each="field: ${fields}">
+        <td th:text="#{'member.' + ${field.key}}">Название поля</td>
+        <td th:text="${field.value}">Значение поля</td>
+    </tr>
+    </tbody>
+</table>
+<input type="button" th:onclick="|location.href='@{/members/{registryNum}/edit(registryNum=${member.registryNum})}'|" value="Редактировать">
 </body>
 </html>
