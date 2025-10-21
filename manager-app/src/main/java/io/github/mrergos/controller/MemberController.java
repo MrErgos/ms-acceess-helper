@@ -1,7 +1,7 @@
 package io.github.mrergos.controller;
 
 import io.github.mrergos.client.MembersRestClient;
-import io.github.mrergos.client.exception.IllegalArgumentExceptionWithProblemDetail;
+import io.github.mrergos.client.exception.ProblemDetailException;
 import io.github.mrergos.entity.MemberNkso;
 import io.github.mrergos.util.Pair;
 import lombok.RequiredArgsConstructor;
@@ -80,8 +80,8 @@ public class MemberController {
         return "redirect:/members/" + savedMember.registryNum();
     }
 
-    @ExceptionHandler(IllegalArgumentExceptionWithProblemDetail.class)
-    public String handleIllegalArgumentExceptionWithProblemDetail(IllegalArgumentExceptionWithProblemDetail exception, Model model) {
+    @ExceptionHandler(ProblemDetailException.class)
+    public String handleIllegalArgumentExceptionWithProblemDetail(ProblemDetailException exception, Model model) {
         model.addAttribute("fields", membersRestClient.getAllFields(exception.getMember()));
 
         Map<String, String> errors = new HashMap<>();

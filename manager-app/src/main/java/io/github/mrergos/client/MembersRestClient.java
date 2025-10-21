@@ -1,7 +1,7 @@
 package io.github.mrergos.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.mrergos.client.exception.IllegalArgumentExceptionWithProblemDetail;
+import io.github.mrergos.client.exception.ProblemDetailException;
 import io.github.mrergos.entity.MemberNkso;
 import io.github.mrergos.util.Pair;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,7 @@ public class MembersRestClient implements MemberClient {
     }
 
     @Override
-    public MemberNkso create(MemberNkso member) throws IllegalArgumentExceptionWithProblemDetail {
+    public MemberNkso create(MemberNkso member) {
         return restClient.post()
                 .uri("/member-nkso-api/members")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -51,7 +51,7 @@ public class MembersRestClient implements MemberClient {
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, ((request, response) -> {
                     ProblemDetail problemDetail = objectMapper.readValue(response.getBody(), ProblemDetail.class);
-                    throw new IllegalArgumentExceptionWithProblemDetail(member,problemDetail);
+                    throw new ProblemDetailException(member,problemDetail);
                 }))
                 .body(MemberNkso.class);
     }
