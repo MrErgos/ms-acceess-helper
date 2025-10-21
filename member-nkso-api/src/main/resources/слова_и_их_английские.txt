@@ -1,42 +1,43 @@
-Член НКСО - Member of the National Board of Appraisers - MemberNkso
-№_По_Реестру - No. in the Register - Registry Number - registryNum
-Дата_Вкл_В_Реестр_(сокр) - Date_Included_in_Register_(abbreviation) - Date_Added_to_Registry_(abbr.) - dateAddedToRegistry
-(Т) Дата_Вкл_В_Реестр_(сокр) - Date_Added_to_Registry_(abbr.) in text - textDateAddedToRegistry
-Дата_Вкл_В_Реестр_(полн) - Date_Added_to_Register_(full) in text - fullTextDateAddedToRegistry
-Субъект_РФ - Subject_RF - subjectRf
-Город - City - city
-Регион_Партнёрство - Region_Partnership - regionPartnership
-Код_РП - RP_Code - rpCode
-Фамилия - Last name - lastname
-Имя - First name - firstname
-Отчество - Middle name - middlename
-Дата_Рождения - Date of Birth - dateOfBirth
-Место_Рождения - Place_of_Birth - birthPlace
-ИНН - TIN - tin
-СНИЛС - Social Security Number - ssn
-Членство_В_РП — Membership in RP — membershipInRp
-Регистр_№_в_РП — Register No. in RP — registerNumInRp
-Дата_Вступл_Р_РП — Date of Joining RP — dateJoiningRp
-Дата_Искл_Из_Р_РП — Date of Exclusion from RP — dateExclusionFromRp
-Т_Общий_Трудовой_Стаж — Total Work Experience — totalWorkExperience
-Т_Оценочный_Трудовой_Стаж — Evaluated Work Experience — evaluatedWorkExperience
-Оценочный_Трудовой_Стаж — Assessment Work Experience — assessmentWorkExperience
-Паспорт — Passport — passport
-Адрес_Регистрации — Registration Address — registrationAddress
-Адрес_Корреспонденции — Correspondence Address — correspondenceAddress
-E-mail_члена_НКСО — Member Email NKSO — memberEmailNkso
-E-mail_члена_НКСО_2 — Member Email NKSO 2 — memberEmailNkso2
-Код_Города_Тел — City Phone Code — cityPhoneCode
-Тел_Контактный — Contact Phone — contactPhone
-Телефон_Моб — Mobile Phone — mobilePhone
-Текст_№_Справки_О_Судимостим — Certificate No. Criminal Record (Text) — textCertificateNumCriminalRecord
-№_Справки_О_Судимости — Certificate No. Criminal Record — certificateNumCriminalRecord
-Текст_Дата_Справки_О_Судимости — Certificate Date (Text) — textCertificateDateCriminalRecord
-Дата_Справки_О_Судимости — Certificate Date — certificateDateCriminalRecord
-Т_Дата_Справки_О_Судимости — Certificate Date (T) — tCertificateDateCriminalRecord
-Дата_Изменения_в_Реестр_Члены — Date of Change in Register (Members) — dateChangeInRegisterMembers
-Дата_Изменениям_Члены — Date of Change (Members) — dateChangeMembers
-Дата_Изминение_Члены — Date of Modification (Members) — dateModificationMembers
-Необходимо_Изменит_Члены — Need to Change (Members) — needToChangeMembers
-Адекватность_Члена_НКСО — Adequacy of NKSO Member — adequacyNksoMember
-Примечание_о_Члене_НКСО — Note about NKSO Member — noteNksoMember
+Имя поля в MS Access - Перевод - Название переменных - Описание
+Член НКСО - Member of the National Board of Appraisers - MemberNkso - Название объекта
+№_По_Реестру - No. in the Register - Registry Number - registryNum - Номер по реестру членов НП СРО «НКСО»
+Дата_Вкл_В_Реестр_(сокр) - Date_Included_in_Register_(abbreviation) - Date_Added_to_Registry_(abbr.) - dateAddedToRegistry - Дата включения в реестр, записанный в сокращенном виде. Пример: 28.03.2012
+(Т) Дата_Вкл_В_Реестр_(сокр) - Date_Added_to_Registry_(abbr.) in text - textDateAddedToRegistry - Дата включения в реестр, записанный в ТЕКСТОВОМ ФОРМАТЕ в сокращенном виде. Пример: 28.03.2012
+Дата_Вкл_В_Реестр_(полн) - Date_Added_to_Register_(full) in text - fullTextDateAddedToRegistry - Дата включения в реестр, записанный в полном виде. Пример: «28» Марта 2012 года
+Субъект_РФ - Subject_RF - subjectRf - Субъект Российской Федерации, где работает член НП СРО «НКСО»
+Город - City - city - Город, в котором работает член НП СРО «НКСО»
+Регион_Партнёрство - Region_Partnership - regionPartnership - Региональное Партнёрство в котором состоит член НП СРО «НКСО»
+Код_РП - RP_Code - rpCode - Код Регионального Партнёрства в котором состоит член НП СРО «НКСО»
+Фамилия - Last name - lastname - Фамилия члена НП СРО «НКСО»
+Имя - First name - firstname - Имя члена НП СРО «НКСО»
+Отчество - Middle name - middlename - Отчество члена НП СРО «НКСО»
+Дата_Рождения - Date of Birth - dateOfBirth - Дата рождения члена НП СРО «НКСО»
+Место_Рождения - Place_of_Birth - birthPlace - Место рождения члена НП СРО «НКСО»
+ИНН - TIN - tin - ИНН члена НП СРО «НКСО»
+СНИЛС - Social Security Number - ssn - СНИЛС члена НП СРО «НКСО»
+Членство_В_РП - Membership in RP - membershipInRp - Является ли член НП СРО «НКСО» членом Регионального партнёрства (Да/Нет)
+Регистр_№_в_РП - Register No. in RP - registerNumInRp - Регистрационный номер в Региональном партнёрстве
+Дата_Вступл_Р_РП - Date of Joining RP - dateJoiningRp - Если Да, то ввести дату вступления в Региональное партнёрство
+Дата_Искл_Из_Р_РП - Date of Exclusion from RP - dateExclusionFromRp - Если исключён из Регионального партнёрства, то вести дату выхода из Регионального партнёрства
+Т_Общий_Трудовой_Стаж - Total Work Experience - totalWorkExperience - Общий трудовой стаж члена НП СРО «НКСО»
+Т_Оценочный_Трудовой_Стаж - Evaluated Work Experience - evaluatedWorkExperience - Трудовой стаж в оценочной деятельности члена НП СРО «НКСО»
+Оценочный_Трудовой_Стаж - Assessment Work Experience - assessmentWorkExperience - Трудовой стаж в оценочной деятельности члена НП СРО «НКСО»
+Паспорт - Passport - passport - Паспортные данные члена НП СРО «НКСО»
+Адрес_Регистрации - Registration Address - registrationAddress - Адрес регистрации по паспорту члена НП СРО «НКСО»
+Адрес_Корреспонденции - Correspondence Address - correspondenceAddress - Адрес регистрации по паспорту члена НП СРО «НКСО»
+E-mail_члена_НКСО - Member Email NKSO - memberEmailNkso - Адрес электронной почты члена НП СРО «НКСО»
+E-mail_члена_НКСО_2 - Member Email NKSO 2 - memberEmailNkso2 - Второй Адрес электронной почты члена НП СРО «НКСО»
+Код_Города_Тел - City Phone Code - cityPhoneCode - Телефонный код города
+Тел_Контактный - Contact Phone - contactPhone - Телефон контактный члена НП СРО «НКСО»
+Телефон_Моб - Mobile Phone - mobilePhone - Мобильный телефон члена НП СРО «НКСО»
+Текст_№_Справки_О_Судимостим - Certificate No. Criminal Record (Text) - textCertificateNumCriminalRecord - //Придумать
+№_Справки_О_Судимости - Certificate No. Criminal Record - certificateNumCriminalRecord - Номер справки, о судимости, подаваемой при вступлении оценщика в члены НП СРО «НКСО»
+Текст_Дата_Справки_О_Судимости - Certificate Date (Text) - textCertificateDateCriminalRecord - //Придумать
+Дата_Справки_О_Судимости - Certificate Date - certificateDateCriminalRecord - Дата справки, о судимости, подаваемой при вступлении оценщика в члены НП СРО «НКСО»
+Т_Дата_Справки_О_Судимости - Certificate Date (T) - tCertificateDateCriminalRecord - //Придумать
+Дата_Изменения_в_Реестр_Члены - Date of Change in Register (Members) - dateChangeInRegisterMembers - Дата внесения изменений в Базу Данных
+Дата_Изменениям_Члены - Date of Change (Members) - dateChangeMembers - Дата, поля которые были изменены, прошлые данные полей
+Дата_Изминение_Члены - Date of Modification (Members) - dateModificationMembers - Дата, поля которые были изменены, прошлые данные полей
+Необходимо_Изменит_Члены - Need to Change (Members) - needToChangeMembers - План что необходимо сделать (для работающих с базой)
+Адекватность_Члена_НКСО - Adequacy of NKSO Member - adequacyNksoMember - Готовность к взаимодействию члена НКСО с Исполнительной дирекции.
+Примечание_о_Члене_НКСО - Note about NKSO Member - noteNksoMember - Информация о взаимодействии Исполнительной дирекции с членом НКСО.
