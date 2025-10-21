@@ -23,7 +23,7 @@ public class UpdateMemberNksoPayload {
     @Size(max = 50, message = "{manager.membernkso.creating.error.textDateAddedToRegistry_must_be_shorter}")
     private String textDateAddedToRegistry;
 
-    @Pattern(regexp = "(^«\\d{1,2}»\\s[а-яА-Я]+\\s\\d{4}\\sгода$)|(^$)", message = "{manager.membernkso.creating.error.fullTextDateAddedToRegistry_must_be_like}")
+    @Pattern(regexp = "(^\"\\d{1,2}\"\\s[а-яА-Я]+\\s\\d{4}\\sгода$)|(^$)", message = "{manager.membernkso.creating.error.fullTextDateAddedToRegistry_must_be_like}")
     @Size(max = 30, message = "{manager.membernkso.creating.error.fullTextDateAddedToRegistry_must_be_shorter}")
     private String fullTextDateAddedToRegistry;
 

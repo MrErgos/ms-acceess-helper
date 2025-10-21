@@ -1,7 +1,4 @@
 spring:
-  mvc:
-    problemdetails:
-      enabled: true
   application:
     name: ms-access-helper-manager-app
   datasource:
