@@ -3,17 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <title>Создание нового члена НКСО</title>
+    <link rel="stylesheet" th:href="@{~/css/member-form.css}">
 </head>
 <body>
 <div th:insert="~{header :: header}"></div>
-<form th:action="@{/members/create}" th:method="post">
-    <div th:each="field : ${fields}">
-        <label th:for="${field.key}" th:text="#{'member.' + ${field.key}}">Название поля</label>
-        <input type="text" th:name="${field.key}" th:value="${field.value} ? ${field.value} : ''" />
-        <span th:if="${errors != null && errors.containsKey(field.key)}" th:text="${errors.get(field.key)}"></span>
+<form th:action="@{/members/create}" th:method="post" th:object="${member}">
+    <div class="field-row">
+        <label th:for="*{registryNum}" th:text="#{member.registryNum}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.registryNum}">?</span>
+        <input th:field="*{registryNum}" type="text" required/>
     </div>
-    <div>
-        <input type="submit" value="Сохранить" />
+    <p th:errors="*{registryNum}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.dateAddedToRegistry}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.dateAddedToRegistry}">?</span>
+        <input th:field="*{dateAddedToRegistry}" type="date"/>
+    </div>
+    <p th:errors="*{dateAddedToRegistry}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.textDateAddedToRegistry}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.textDateAddedToRegistry}">?</span>
+        <input th:field="*{textDateAddedToRegistry}" type="text"/>
+    </div>
+    <p th:errors="*{textDateAddedToRegistry}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.fullTextDateAddedToRegistry}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.fullTextDateAddedToRegistry}">?</span>
+        <input th:field="*{fullTextDateAddedToRegistry}" type="text"/>
+    </div>
+    <p th:errors="*{fullTextDateAddedToRegistry}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.subjectRf}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.subjectRf}">?</span>
+        <input th:field="*{subjectRf}" type="text"/>
+    </div>
+    <p th:errors="*{subjectRf}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.city}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.city}">?</span>
+        <input th:field="*{city}" type="text"/>
+    </div>
+    <p th:errors="*{city}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.regionPartnership}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.regionPartnership}">?</span>
+        <input th:field="*{regionPartnership}" type="text"/>
+    </div>
+    <p th:errors="*{regionPartnership}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.rpCode}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.rpCode}">?</span>
+        <input th:field="*{rpCode}" type="text"/>
+    </div>
+    <p th:errors="*{rpCode}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.lastname}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.lastname}">?</span>
+        <input th:field="*{lastname}" type="text"/>
+    </div>
+    <p th:errors="*{lastname}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.firstname}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.firstname}">?</span>
+        <input th:field="*{firstname}" type="text"/>
+    </div>
+    <p th:errors="*{firstname}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.middlename}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.middlename}">?</span>
+        <input th:field="*{middlename}" type="text"/>
+    </div>
+    <p th:errors="*{middlename}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.dateOfBirth}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.dateOfBirth}">?</span>
+        <input th:field="*{dateOfBirth}" type="text"/>
+    </div>
+    <p th:errors="*{dateOfBirth}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.birthPlace}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.birthPlace}">?</span>
+        <input th:field="*{birthPlace}" type="text"/>
+    </div>
+    <p th:errors="*{birthPlace}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.tin}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.tin}">?</span>
+        <input th:field="*{tin}" type="text"/>
+    </div>
+    <p th:errors="*{tin}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.ssn}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.ssn}">?</span>
+        <input th:field="*{ssn}" type="text"/>
+    </div>
+    <p th:errors="*{ssn}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.membershipInRp}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.membershipInRp}">?</span>
+        <input th:field="*{membershipInRp}" type="text"/>
+    </div>
+    <p th:errors="*{membershipInRp}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.registerNumInRp}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.registerNumInRp}">?</span>
+        <input th:field="*{registerNumInRp}" type="text"/>
+    </div>
+    <p th:errors="*{registerNumInRp}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.dateJoiningRp}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.dateJoiningRp}">?</span>
+        <input th:field="*{dateJoiningRp}" type="text"/>
+    </div>
+    <p th:errors="*{dateJoiningRp}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.dateExclusionFromRp}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.dateExclusionFromRp}">?</span>
+        <input th:field="*{dateExclusionFromRp}" type="text"/>
+    </div>
+    <p th:errors="*{dateExclusionFromRp}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.totalWorkExperience}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.totalWorkExperience}">?</span>
+        <input th:field="*{totalWorkExperience}" type="text"/>
+    </div>
+    <p th:errors="*{totalWorkExperience}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.evaluatedWorkExperience}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.evaluatedWorkExperience}">?</span>
+        <input th:field="*{evaluatedWorkExperience}" type="text"/>
+    </div>
+    <p th:errors="*{evaluatedWorkExperience}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.assessmentWorkExperience}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.assessmentWorkExperience}">?</span>
+        <input th:field="*{assessmentWorkExperience}" type="text"/>
+    </div>
+    <p th:errors="*{assessmentWorkExperience}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.passport}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.passport}">?</span>
+        <input th:field="*{passport}" type="text"/>
+    </div>
+    <p th:errors="*{passport}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.registrationAddress}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.registrationAddress}">?</span>
+        <input th:field="*{registrationAddress}" type="text"/>
+    </div>
+    <p th:errors="*{registrationAddress}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.correspondenceAddress}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.correspondenceAddress}">?</span>
+        <input th:field="*{correspondenceAddress}" type="text"/>
+    </div>
+    <p th:errors="*{correspondenceAddress}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.memberEmailNkso}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso}">?</span>
+        <input th:field="*{memberEmailNkso}" type="text"/>
+    </div>
+    <p th:errors="*{memberEmailNkso}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.memberEmailNkso2}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso2}">?</span>
+        <input th:field="*{memberEmailNkso2}" type="text"/>
+    </div>
+    <p th:errors="*{memberEmailNkso2}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.cityPhoneCode}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.cityPhoneCode}">?</span>
+        <input th:field="*{cityPhoneCode}" type="text"/>
+    </div>
+    <p th:errors="*{cityPhoneCode}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.contactPhone}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.contactPhone}">?</span>
+        <input th:field="*{contactPhone}" type="text"/>
+    </div>
+    <p th:errors="*{contactPhone}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.mobilePhone}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.mobilePhone}">?</span>
+        <input th:field="*{mobilePhone}" type="text"/>
+    </div>
+    <p th:errors="*{mobilePhone}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.textCertificateNumCriminalRecord}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.textCertificateNumCriminalRecord}">?</span>
+        <input th:field="*{textCertificateNumCriminalRecord}" type="text"/>
+    </div>
+    <p th:errors="*{textCertificateNumCriminalRecord}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.certificateNumCriminalRecord}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.certificateNumCriminalRecord}">?</span>
+        <input th:field="*{certificateNumCriminalRecord}" type="text"/>
+    </div>
+    <p th:errors="*{certificateNumCriminalRecord}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.textCertificateDateCriminalRecord}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.textCertificateDateCriminalRecord}">?</span>
+        <input th:field="*{textCertificateDateCriminalRecord}" type="text"/>
+    </div>
+    <p th:errors="*{textCertificateDateCriminalRecord}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.certificateDateCriminalRecord}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.certificateDateCriminalRecord}">?</span>
+        <input th:field="*{certificateDateCriminalRecord}" type="text"/>
+    </div>
+    <p th:errors="*{certificateDateCriminalRecord}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.tCertificateDateCriminalRecord}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.tCertificateDateCriminalRecord}">?</span>
+        <input th:field="*{tCertificateDateCriminalRecord}" type="text"/>
+    </div>
+    <p th:errors="*{tCertificateDateCriminalRecord}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.dateChangeInRegisterMembers}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.dateChangeInRegisterMembers}">?</span>
+        <input th:field="*{dateChangeInRegisterMembers}" type="text"/>
+    </div>
+    <p th:errors="*{dateChangeInRegisterMembers}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.dateChangeMembers}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.dateChangeMembers}">?</span>
+        <input th:field="*{dateChangeMembers}" type="text"/>
+    </div>
+    <p th:errors="*{dateChangeMembers}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.dateModificationMembers}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.dateModificationMembers}">?</span>
+        <input th:field="*{dateModificationMembers}" type="text"/>
+    </div>
+    <p th:errors="*{dateModificationMembers}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.needToChangeMembers}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.needToChangeMembers}">?</span>
+        <input th:field="*{needToChangeMembers}" type="text"/>
+    </div>
+    <p th:errors="*{needToChangeMembers}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.adequacyNksoMember}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.adequacyNksoMember}">?</span>
+        <input th:field="*{adequacyNksoMember}" type="text"/>
+    </div>
+    <p th:errors="*{adequacyNksoMember}" class="error"></p>
+
+    <div class="field-row">
+        <label th:text="#{member.noteNksoMember}"></label>
+        <span class="hint" th:attr="data-hint=#{member.hint.noteNksoMember}">?</span>
+        <input th:field="*{noteNksoMember}" type="text"/>
+    </div>
+    <p th:errors="*{noteNksoMember}" class="error"></p>
+
+    <div style="margin-top: 1em;">
+        <button type="submit" th:text="#{member.saveButton}">Сохранить</button>
     </div>
 </form>
 </body>

@@ -3,14 +3,23 @@ package io.github.mrergos.controller;
 import io.github.mrergos.client.MembersRestClient;
 import io.github.mrergos.client.exception.ProblemDetailException;
 import io.github.mrergos.entity.MemberNkso;
+import io.github.mrergos.util.FieldHelper;
 import io.github.mrergos.util.Pair;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
+import org.springframework.http.ProblemDetail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -69,30 +78,37 @@ public class MemberController {
 
     @GetMapping("/create")
     public String createMember(Model model) {
-        model.addAttribute("fields", membersRestClient.getAllEmptyFields());
-        model.addAttribute("errors", null);
+        model.addAttribute("member", new MemberNkso());
         return "create_member";
     }
 
     @PostMapping("/create")
-    public String createMember(MemberNkso member) {
-        MemberNkso savedMember = membersRestClient.create(member);
-        return "redirect:/members/" + savedMember.registryNum();
+    public String createMember(@ModelAttribute("member") MemberNkso member,BindingResult bindingResult, Model model) {
+        try {
+            MemberNkso savedMember = membersRestClient.create(member);
+            return "redirect:/members/" + savedMember.getRegistryNum();
+        } catch (ProblemDetailException exception) {
+            Map<String, String> errors = this.extractErrors(exception.getProblemDetail());
+            errors.forEach((fieldName, message) -> {
+                bindingResult.addError(new FieldError("member",fieldName,FieldHelper.getFieldValue(member, fieldName),false, null, null,  message));
+            });
+            model.addAttribute("member", member);
+            model.addAttribute(BindingResult.MODEL_KEY_PREFIX + "member", bindingResult);
+            return "create_member";
+        }
     }
 
-    @ExceptionHandler(ProblemDetailException.class)
-    public String handleIllegalArgumentExceptionWithProblemDetail(ProblemDetailException exception, Model model) {
-        model.addAttribute("fields", membersRestClient.getAllFields(exception.getMember()));
-
-        Map<String, String> errors = new HashMap<>();
-        if (exception.getProblemDetail().getProperties().get("errors") instanceof List list) {
-            list.forEach(stringStringLinkedHashMap -> {
-                if (stringStringLinkedHashMap instanceof LinkedHashMap map) {
-                    errors.put((String) map.get("first"), (String) map.get("second"));
-                }
-            });
+    private Map<String, String> extractErrors(ProblemDetail problemDetail) {
+        if (problemDetail.getProperties().get("errors") instanceof List<?> list) {
+            return list.stream()
+                    .filter(Map.class::isInstance)
+                    .map(Map.class::cast)
+                    .collect(Collectors.toMap(
+                            map -> map.get("field").toString(),
+                            map -> map.get("message").toString()
+                    ));
+        } else {
+            return Map.of();
         }
-        model.addAttribute("errors", errors);
-        return "create_member";
     }
 }

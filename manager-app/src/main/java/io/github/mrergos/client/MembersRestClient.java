@@ -59,7 +59,7 @@ public class MembersRestClient implements MemberClient {
     @Override
     public MemberNkso update(MemberNkso member) {
         return restClient.put()
-                .uri("/member-nkso-api/members/{registryNum}", member.registryNum())
+                .uri("/member-nkso-api/members/{registryNum}", member.getRegistryNum())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(member)
                 .retrieve()
