@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+<nav th:fragment="header" class="navbar">
+    <ul>
+        <li>
+            <a th:href="@{/}">
+                <img src="transp-logo.png" th:src="@{/images/transp-logo.png}" th:alt="#{logo}"
+                width="15%" height="15%"/>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/}">Home</a>
+        </li>
+        <li>
+            <a th:href="@{/members}">Members</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

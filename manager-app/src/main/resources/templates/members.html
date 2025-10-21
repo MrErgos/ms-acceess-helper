@@ -7,6 +7,16 @@
 <body>
 <h2 th:text="#{members.title}">Члены НКСО</h2>
 
+<div th:insert="~{header :: header}"></div>
+<input type="button" th:onclick="|location.href='@{/members/create}'|" value="Создать нового члена" />
+
+<form th:action="@{/members}" method="get">
+    <label>
+        <input type="text" name="filter" th:value="${filter}" th:placeholder="#{members.filter.placeholder}">
+        <button type="submit">Поиск</button>
+    </label>
+</form>
+
 <table border="1">
     <thead>
     <tr>
@@ -102,5 +112,14 @@
     </tr>
     </tbody>
 </table>
+<div th:if="${totalPages > 1}" class="pagination">
+    <a th:href="@{/members(page=0,filter=${filter})}" th:text="1"></a>
+</div>
+<div th:if="${totalPages > 1}" class="pagination" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/members(page=${pageNumber - 1},filter=${filter})}" th:text="${pageNumber}"></a>
+</div>
+<div th:if="${totalPages > 1}" class="pagination">
+    <a th:href="@{/members(page=${totalPages - 1},filter=${filter})}" th:text="${totalPages}"></a>
+</div>
 </body>
 </html>
