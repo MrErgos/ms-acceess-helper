@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "01_Члены_НКСО")
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @Data
 public class MemberNkso {

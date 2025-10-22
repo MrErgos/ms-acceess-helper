@@ -12,10 +12,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class UpdateMemberNksoPayload {
-    @NotNull(message = "{manager.membernkso.creating.error.registryNum_is_required}")
-    @Size(max = 5, message = "{manager.membernkso.creating.error.registryNum_must_be_shorter}")
-    private String registryNum;
-
     @NotNull(message = "{manager.membernkso.creating.error.dateAddedToRegistry_is_required}")
     private LocalDate dateAddedToRegistry;
 
@@ -132,18 +128,47 @@ public class UpdateMemberNksoPayload {
 
 
     public MemberNkso toMemberNkso() {
-        return new MemberNkso(this.registryNum, this.dateAddedToRegistry, this.textDateAddedToRegistry,
-                this.fullTextDateAddedToRegistry, this.subjectRf, this.city, this.regionPartnership,
-                this.rpCode, this.lastname, this.firstname, this.middlename, this.dateOfBirth,
-                this.birthPlace, this.tin, this.ssn, this.membershipInRp, this.registerNumInRp,
-                this.dateJoiningRp, this.dateExclusionFromRp, this.totalWorkExperience,
-                this.evaluatedWorkExperience, this.assessmentWorkExperience, this.passport,
-                this.registrationAddress, this.correspondenceAddress, this.memberEmailNkso,
-                this.memberEmailNkso2, this.cityPhoneCode, this.contactPhone, this.mobilePhone,
-                this.textCertificateNumCriminalRecord, this.certificateNumCriminalRecord,
-                this.textCertificateDateCriminalRecord, this.certificateDateCriminalRecord,
-                this.tCertificateDateCriminalRecord, this.dateChangeInRegisterMembers,
-                this.dateChangeMembers, this.dateModificationMembers, this.needToChangeMembers,
-                this.adequacyNksoMember, this.noteNksoMember);
+        return MemberNkso.builder()
+                .dateAddedToRegistry(this.dateAddedToRegistry)
+                .textDateAddedToRegistry(this.textDateAddedToRegistry)
+                .fullTextDateAddedToRegistry(this.fullTextDateAddedToRegistry)
+                .subjectRf(this.subjectRf)
+                .city(this.city)
+                .regionPartnership(this.regionPartnership)
+                .rpCode(this.rpCode)
+                .lastname(this.lastname)
+                .firstname(this.firstname)
+                .middlename(this.middlename)
+                .dateOfBirth(this.dateOfBirth)
+                .birthPlace(this.birthPlace)
+                .tin(this.tin)
+                .ssn(this.ssn)
+                .membershipInRp(this.membershipInRp)
+                .registerNumInRp(this.registerNumInRp)
+                .dateJoiningRp(this.dateJoiningRp)
+                .dateExclusionFromRp(this.dateExclusionFromRp)
+                .totalWorkExperience(this.totalWorkExperience)
+                .evaluatedWorkExperience(this.evaluatedWorkExperience)
+                .assessmentWorkExperience(this.assessmentWorkExperience)
+                .passport(this.passport)
+                .registrationAddress(this.registrationAddress)
+                .correspondenceAddress(this.correspondenceAddress)
+                .memberEmailNkso(this.memberEmailNkso)
+                .memberEmailNkso2(this.memberEmailNkso2)
+                .cityPhoneCode(this.cityPhoneCode)
+                .contactPhone(this.contactPhone)
+                .mobilePhone(this.mobilePhone)
+                .textCertificateNumCriminalRecord(this.textCertificateNumCriminalRecord)
+                .certificateNumCriminalRecord(this.certificateNumCriminalRecord)
+                .textCertificateDateCriminalRecord(this.textCertificateDateCriminalRecord)
+                .certificateDateCriminalRecord(this.certificateDateCriminalRecord)
+                .tCertificateDateCriminalRecord(this.tCertificateDateCriminalRecord)
+                .dateChangeInRegisterMembers(this.dateChangeInRegisterMembers)
+                .dateChangeMembers(this.dateChangeMembers)
+                .dateModificationMembers(this.dateModificationMembers)
+                .needToChangeMembers(this.needToChangeMembers)
+                .adequacyNksoMember(this.adequacyNksoMember)
+                .noteNksoMember(this.noteNksoMember)
+                .build();
     }
 }

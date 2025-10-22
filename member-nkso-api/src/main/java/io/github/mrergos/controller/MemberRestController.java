@@ -51,8 +51,8 @@ public class MemberRestController {
 
     @PutMapping("/{registryNum}")
     @ResponseStatus(HttpStatus.OK)
-    public MemberNksoPayloadResponse updateMember(@RequestBody @Valid UpdateMemberNksoPayload updateMemberNksoPayload) {
-        return service.update(updateMemberNksoPayload);
+    public MemberNksoPayloadResponse updateMember(@RequestBody @Valid UpdateMemberNksoPayload updateMemberNksoPayload, @PathVariable String registryNum) {
+        return service.update(updateMemberNksoPayload, registryNum);
     }
 
     @DeleteMapping("/{registryNum}")
