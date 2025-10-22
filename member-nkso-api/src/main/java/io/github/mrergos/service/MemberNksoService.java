@@ -3,21 +3,18 @@ package io.github.mrergos.service;
 import io.github.mrergos.controller.payload.request.CreateMemberNksoPayload;
 import io.github.mrergos.controller.payload.request.UpdateMemberNksoPayload;
 import io.github.mrergos.controller.payload.response.MemberNksoPayloadResponse;
+import io.github.mrergos.controller.payload.response.PageResponse;
 import io.github.mrergos.ecxeption.MemberExistsException;
 import io.github.mrergos.ecxeption.MemberNotFoundException;
 import io.github.mrergos.entity.MemberNkso;
 import io.github.mrergos.repository.MemberNksoRepository;
-import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -28,14 +25,37 @@ import java.util.Optional;
 public class MemberNksoService {
     private final MemberNksoRepository repository;
 
-    public Pair<Integer, List<MemberNksoPayloadResponse>> findAll(int pageNumber) {
+    public PageResponse<MemberNksoPayloadResponse> findAll(int pageNumber) {
         Pageable pageable = PageRequest.of(pageNumber, 2);
         Page<MemberNkso> page = repository.findAll(pageable);
         List<MemberNksoPayloadResponse> members = page.getContent()
                 .stream()
                 .map(MemberNksoPayloadResponse::new)
                 .toList();
-        return Pair.of(page.getTotalPages(), members);
+        return new PageResponse<>(members,
+                page.getTotalPages(),
+                (int) page.getTotalElements(),
+                page.getSize(),
+                page.getNumber(),
+                page.isFirst(),
+                page.isLast());
+    }
+
+    public PageResponse<MemberNksoPayloadResponse> findPageByFilter(String filter, int pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber, 2);
+        filter = "%" + filter.trim() + "%";
+        Page<MemberNkso> page = repository.findByLastnameIsLikeIgnoreCaseOrFirstnameIsLikeIgnoreCaseOrMiddlenameIsLikeIgnoreCaseOrRegistryNumIsLikeIgnoreCase(filter, filter, filter, filter, pageable);
+        List<MemberNksoPayloadResponse> members = page.getContent()
+                .stream()
+                .map(MemberNksoPayloadResponse::new)
+                .toList();
+        return new PageResponse<>(members,
+                page.getTotalPages(),
+                (int) page.getTotalElements(),
+                page.getSize(),
+                page.getNumber(),
+                page.isFirst(),
+                page.isLast());
     }
 
     public Optional<MemberNksoPayloadResponse> findById(String registryNum) {
@@ -43,17 +63,6 @@ public class MemberNksoService {
             registryNum = "0".repeat(5 - registryNum.length()) + registryNum;
         }
         return repository.findById(registryNum).map(MemberNksoPayloadResponse::new);
-    }
-
-    public Pair<Integer, List<MemberNksoPayloadResponse>> findPageByFilter(String filter, int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, 2);
-        filter = "%" + filter.trim() + "%";
-        Page<MemberNkso> page = repository.findByLastnameIsLikeIgnoreCaseOrFirstnameIsLikeIgnoreCaseOrMiddlenameIsLikeIgnoreCaseOrRegistryNumIsLikeIgnoreCase(pageable,filter, filter, filter, filter);
-        List<MemberNksoPayloadResponse> members = page.getContent()
-                .stream()
-                .map(MemberNksoPayloadResponse::new)
-                .toList();
-        return Pair.of(page.getTotalPages(), members);
     }
 
     public MemberNksoPayloadResponse save(CreateMemberNksoPayload createMemberNksoPayload) {

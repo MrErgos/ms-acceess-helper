@@ -3,17 +3,16 @@ package io.github.mrergos.controller;
 import io.github.mrergos.controller.payload.request.CreateMemberNksoPayload;
 import io.github.mrergos.controller.payload.request.UpdateMemberNksoPayload;
 import io.github.mrergos.controller.payload.response.MemberNksoPayloadResponse;
+import io.github.mrergos.controller.payload.response.PageResponse;
 import io.github.mrergos.service.MemberNksoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
-import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -24,8 +23,8 @@ public class MemberRestController {
     private final MessageSource messageSource;
 
     @GetMapping
-    public Pair<Integer, List<MemberNksoPayloadResponse>> getMembersPageByFilter(@RequestParam(value = "filter", required = false, defaultValue = "") String filter,
-                                       @RequestParam(value = "page", defaultValue = "0") int page) {
+    public PageResponse<MemberNksoPayloadResponse> getMembersPageByFilter(@RequestParam(value = "filter", required = false, defaultValue = "") String filter,
+                                                                                         @RequestParam(value = "page", defaultValue = "0") int page) {
         if (filter.isBlank()) {
             return service.findAll(page);
         } else {

@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 
 public interface MemberNksoRepository extends CrudRepository<MemberNkso, String> {
-    Page<MemberNkso> findByLastnameIsLikeIgnoreCaseOrFirstnameIsLikeIgnoreCaseOrMiddlenameIsLikeIgnoreCaseOrRegistryNumIsLikeIgnoreCase(Pageable pageable, String lastname, String firstname, String middlename, String registryNum);
+    Page<MemberNkso> findByLastnameIsLikeIgnoreCaseOrFirstnameIsLikeIgnoreCaseOrMiddlenameIsLikeIgnoreCaseOrRegistryNumIsLikeIgnoreCase( String lastname, String firstname, String middlename, String registryNum, Pageable pageable);
 
     Page<MemberNkso> findAll(Pageable pageable);
 }

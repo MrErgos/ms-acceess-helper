@@ -9,9 +9,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class MemberNksoPayloadResponse {
-/* example for request payload
-    @NotNull(message = "{manager.membernkso.creating.error.registry_num_is_required}")
-    @Size(max = 5, message = "{manager.membernkso.creating.error.registry_num_must_be_shorter}")*/
     private String registryNum;
     private LocalDate dateAddedToRegistry;
     private String textDateAddedToRegistry;
