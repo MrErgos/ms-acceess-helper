@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <nav th:fragment="header" class="navbar">
@@ -14,10 +15,21 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/}">Home</a>
+            <a th:href="@{/}" th:text="#{header.main_page}">Главная</a>
         </li>
         <li>
-            <a th:href="@{/members}">Members</a>
+            <a th:href="@{/members}" th:text="#{header.members}">Члены</a>
+        </li>
+        <li>
+            <a th:href="@{/members/create}" th:text="#{header.create_member}">Создать нового члена</a>
+        </li>
+        <li>
+            <form th:action="@{/members}" method="get">
+                <label>
+                    <input type="text" name="filter" th:placeholder="#{members.filter.placeholder}">
+                    <button type="submit" th:text="#{members.filter.button}">Поиск</button>
+                </label>
+            </form>
         </li>
     </ul>
 </nav>

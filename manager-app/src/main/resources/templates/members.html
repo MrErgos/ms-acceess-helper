@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{members.title}">Члены НКСО</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
 <h2 th:text="#{members.title}">Члены НКСО</h2>
 
 <div th:insert="~{header :: header}"></div>
-<input type="button" th:onclick="|location.href='@{/members/create}'|" value="Создать нового члена" />
 
 <form th:action="@{/members}" method="get">
     <label>
         <input type="text" name="filter" th:value="${filter}" th:placeholder="#{members.filter.placeholder}">
-        <button type="submit">Поиск</button>
+        <button type="submit" th:text="#{members.filter.button}">Поиск</button>
     </label>
 </form>
 
-<table border="1">
+<table>
     <thead>
     <tr>
         <th th:text="#{member.registryNum}">№ По Реестру</th>
@@ -65,9 +65,8 @@
     </thead>
 
     <tbody>
-    <tr th:each="member : ${members}"
-        th:attr="onclick=|window.location='@{/members/{registryNum}(registryNum=${member.registryNum})}'|"
-        style="cursor:pointer;">
+    <tr th:each="member : ${membersPage.content}"
+        th:attr="onclick=|window.location='@{/members/{registryNum}(registryNum=${member.registryNum})}'|">
         <td th:text="${member.registryNum}"></td>
         <td th:text="${member.dateAddedToRegistry}"></td>
         <td th:text="${member.textDateAddedToRegistry}"></td>
@@ -112,14 +111,12 @@
     </tr>
     </tbody>
 </table>
-<div th:if="${totalPages > 1}" class="pagination">
-    <a th:href="@{/members(page=0,filter=${filter})}" th:text="1"></a>
-</div>
-<div th:if="${totalPages > 1}" class="pagination" th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/members(page=${pageNumber - 1},filter=${filter})}" th:text="${pageNumber}"></a>
-</div>
-<div th:if="${totalPages > 1}" class="pagination">
-    <a th:href="@{/members(page=${totalPages - 1},filter=${filter})}" th:text="${totalPages}"></a>
+<div class="pagination">
+    <a th:if="${!membersPage.first}"
+       th:href="@{/members(page=${membersPage.number - 1}, filter=${filter})}" th:text="'&laquo;'+ #{members.pagination.previous}">&laquo; Назад</a>
+    <span>Страница <span th:text="${membersPage.number + 1}"></span> из <span th:text="${membersPage.totalPages}"></span></span>
+    <a th:if="${!membersPage.last}"
+       th:href="@{/members(page=${membersPage.number + 1}, filter=${filter})}" th:text="#{members.pagination.next} + '&raquo;'">Вперед &raquo;</a>
 </div>
 </body>
 </html>

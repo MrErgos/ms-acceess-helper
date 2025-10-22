@@ -5,7 +5,6 @@
     <title>Добро пожаловать в помощник Ms Access</title>
 </head>
 <body>
-    <input type="button" th:onclick="|location.href='@{/members}'|" value="Члены НКСО" />
-    <input type="button" th:onclick="|location.href='@{/members/create}'|" value="Создать нового члена" />
+    <div th:insert="~{header :: header}"></div>
 </body>
 </html>

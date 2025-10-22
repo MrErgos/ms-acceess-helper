@@ -2,18 +2,20 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Создание нового члена НКСО</title>
+    <title th:text="${member.firstname + ' ' + member.lastname}">Член НКСО</title>
     <link rel="stylesheet" th:href="@{~/css/member-form.css}">
 </head>
 <body>
 <div th:insert="~{header :: header}"></div>
-<form th:action="@{/members/create}" th:method="post" th:object="${member}">
+
+<span th:if="${saveIsSuccessful}">Изменения сохранены</span>
+
+<form th:action="@{/members/{registryNum}/edit(registryNum=${member.registryNum})}" th:method="post" th:object="${member}">
     <div class="field-row">
-        <label th:for="*{registryNum}" th:text="#{member.registryNum}"></label>
+        <span th:text="#{member.registryNum}"></span>
         <span class="hint" th:attr="data-hint=#{member.hint.registryNum}">?</span>
-        <input th:field="*{registryNum}" type="text" required/>
+        <span th:text="*{registryNum}"></span>
     </div>
-    <p th:errors="*{registryNum}" class="error"></p>
 
     <div class="field-row">
         <label th:text="#{member.dateAddedToRegistry}"></label>

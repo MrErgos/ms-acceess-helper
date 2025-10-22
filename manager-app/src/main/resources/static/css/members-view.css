@@ -1,0 +1,32 @@
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f7f9fc;
+    text-align: left;
+    width: 40%;
+}
+
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+.date {
+    color: #3b82f6;
+    font-weight: 500;
+}

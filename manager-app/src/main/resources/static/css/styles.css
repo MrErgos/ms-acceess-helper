@@ -4,17 +4,37 @@
     --color-leather: #9f4636;
     --color-parchment: #f1dcc9;
     --radius: 8px;
+
+    /* Настройка макета */
+    --max-page-width: 1200px; /* ✅ можно отключить ограничение */
+    --min-page-width: 960px;
 }
 
+/* ===== GLOBAL ===== */
 body {
     font-family: "Segoe UI", Roboto, sans-serif;
     background-color: var(--color-parchment);
     color: var(--color-mahogany);
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* ===== NAVIGATION ===== */
+main {
+    width: 100%;
+    max-width: var(--max-page-width);
+    min-width: var(--min-page-width);
+    padding: 1rem;
+}
+
+/* Чтобы включить полноэкранный режим, просто закомментируй эти две строки:
+   max-width: var(--max-page-width);
+   min-width: var(--min-page-width);
+*/
+
+/* ===== NAVBAR ===== */
 .navbar {
     background-color: var(--color-mahogany);
     display: flex;
@@ -23,6 +43,7 @@ body {
     padding: 0.8rem 2rem;
     box-shadow: 0 3px 6px rgba(0,0,0,0.2);
     border-radius: 0 0 var(--radius) var(--radius);
+    width: 100%;
 }
 
 .navbar ul {
@@ -45,60 +66,43 @@ body {
     color: var(--color-leather);
 }
 
-.navbar img {
-    height: 50px;
+/* ===== TABLE WRAPPER ===== */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* ✅ Горизонтальная прокрутка только таблицы */
     border-radius: var(--radius);
-}
-
-/* ===== SEARCH BAR ===== */
-.navbar form input {
-    border: none;
-    padding: 0.4rem 0.7rem;
-    border-radius: var(--radius);
-    outline: none;
-    font-size: 0.9rem;
-}
-
-.navbar form button {
-    background-color: var(--color-leather);
-    color: var(--color-parchment);
-    border: none;
-    padding: 0.45rem 0.8rem;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.navbar form button:hover {
-    background-color: var(--color-chestnut);
-}
-
-/* ===== PAGE CONTENT ===== */
-h2 {
-    text-align: center;
-    margin: 1.5rem 0;
-    color: var(--color-leather);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: white;
 }
 
 /* ===== TABLE ===== */
 table {
-    width: 96%;
-    margin: 1rem auto;
     border-collapse: collapse;
-    background-color: white;
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    min-width: 1200px; /* ✅ Гарантирует стабильную ширину колонок */
+    table-layout: fixed; /* ✅ Фиксирует ширину ячеек */
 }
 
 th, td {
     padding: 0.6rem 0.8rem;
     text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* ✅ Не переносит длинные тексты */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+/* Можно задать примерную ширину колонок для визуальной стабильности */
+th:nth-child(1), td:nth-child(1) { width: 100px; }
+th:nth-child(2), td:nth-child(2) { width: 140px; }
+/* остальные автоматически подстроятся */
 
 thead {
     background-color: var(--color-mahogany);
     color: var(--color-parchment);
+    position: sticky;
+    top: 0; /* ✅ При прокрутке таблицы заголовок остаётся на месте */
+    z-index: 2;
 }
 
 tbody tr:nth-child(even) {
@@ -131,10 +135,10 @@ tbody tr:hover {
     background-color: var(--color-chestnut);
 }
 
-/* ===== RESPONSIVENESS ===== */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-    table {
-        font-size: 0.85rem;
+    main {
+        padding: 0.5rem;
     }
 
     .navbar {
@@ -145,5 +149,9 @@ tbody tr:hover {
     .navbar ul {
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    table {
+        font-size: 0.85rem;
     }
 }
