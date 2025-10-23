@@ -1,0 +1,78 @@
+/* ========================================
+   FILTER FORM (INSIDE HEADER)
+   ======================================== */
+
+/* Белый фон у всей формы, без градиента и тени */
+.navbar .filter-form {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-radius: var(--radius);
+    padding: 6px 8px;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+/* Лупа в инпуте — тёмная иконка, белый фон */
+.navbar .filter-form input[type="text"] {
+    background-color: #fff;
+    color: var(--color-mahogany);
+    border: 1px solid rgba(66,49,58,0.15);
+    padding-left: 36px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 18px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Фокус на инпуте — мягкое свечение */
+.navbar .filter-form input[type="text"]:focus {
+    border-color: var(--color-leather);
+    box-shadow: 0 0 6px rgba(159,70,54,0.25);
+}
+
+/* Кнопка — делаем её контрастной, но аккуратной */
+.navbar .filter-form button {
+    background: var(--color-mahogany);
+    color: #fff;
+    border-radius: var(--radius);
+    box-shadow: none;
+    transition: background 0.2s ease;
+}
+
+.navbar .filter-form button:hover {
+    background: var(--color-chestnut);
+}
+
+/* Крестик очистки — тёмный и ненавязчивый */
+.navbar .filter-form .filter-clear {
+    color: rgba(66,49,58,0.5);
+}
+
+.navbar .filter-form .filter-clear:hover {
+    color: var(--color-mahogany);
+    background: rgba(66,49,58,0.06);
+}
+
+/* Адаптив: если экран узкий, форма стягивается и сохраняет белый фон */
+@media (max-width: 600px) {
+    .navbar .filter-form {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px;
+        background: #fff;
+        max-width: 100%;
+    }
+
+    .navbar .filter-form input[type="text"] {
+        padding-left: 34px;
+    }
+
+    .navbar .filter-form button {
+        width: 100%;
+        text-align: center;
+    }
+}
+.filter-form .filter-clear {
+    right: 34%;
+}

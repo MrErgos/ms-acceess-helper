@@ -1,0 +1,204 @@
+/* ========================================
+   MEMBER VIEW PAGE STYLES
+   ======================================== */
+
+/* ===== PAGE WRAPPER ===== */
+main,
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+h2 {
+    margin: 2rem 0 1rem;
+    text-align: center;
+    color: var(--color-mahogany);
+    font-size: 1.6rem;
+}
+
+/* ===== MEMBER DETAILS TABLE ===== */
+.member-details {
+    border-collapse: collapse;
+    margin: 1rem auto;
+    width: 70%;
+    max-width: 900px;
+    background-color: #ffffff;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.member-details th,
+.member-details td {
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid #e0d6cd;
+    vertical-align: top;
+}
+
+.member-details th {
+    width: 40%;
+    background-color: var(--color-mahogany);
+    color: var(--color-parchment);
+    font-weight: 600;
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.member-details td {
+    width: 60%;
+    background-color: #fffaf6;
+    color: var(--color-mahogany);
+    word-wrap: break-word;
+}
+
+/* ===== ROWS ===== */
+.member-details tr:nth-child(even) td {
+    background-color: #f8efe7;
+}
+
+.member-details tr:hover td {
+    background-color: var(--color-parchment);
+    transition: background var(--transition-fast);
+}
+
+/* ===== BUTTONS AREA ===== */
+.action-buttons {
+    text-align: center;
+    margin: 2rem 0 3rem;
+}
+
+.action-buttons input[type="button"] {
+    padding: 0.8rem 1.6rem;
+    font-size: 1.05rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .member-details {
+        width: 95%;
+        font-size: 0.9rem;
+    }
+
+    .member-details th,
+    .member-details td {
+        display: block;
+        width: 100%;
+        text-align: left;
+        border-bottom: none;
+        padding: 0.6rem 1rem;
+    }
+
+    .member-details th {
+        background-color: var(--color-mahogany);
+        color: var(--color-parchment);
+        border-top: 1px solid var(--color-leather);
+        border-bottom: none;
+    }
+
+    .member-details td {
+        background-color: #fffaf6;
+        padding-bottom: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+.table-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+.inline-input {
+    width: 100%;
+    border: 1px solid var(--color-leather);
+    border-radius: var(--radius);
+    padding: 0.4rem 0.6rem;
+    background-color: #fffaf5;
+    color: var(--color-mahogany);
+    font-size: 0.95rem;
+}
+
+.inline-input:focus {
+    outline: none;
+    border-color: var(--color-chestnut);
+    box-shadow: 0 0 4px rgba(156, 45, 44, 0.3);
+}
+
+.inline-input.readonly {
+    background-color: #f4f0eb;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.saved-highlight {
+    background-color: #e0ffe0 !important;
+    transition: background 0.8s ease;
+}
+.inline-input.readonly {
+    background-color: #f0eeea;
+    color: #666;
+    font-style: italic;
+    cursor: not-allowed;
+}
+
+.inline-input.readonly:focus {
+    outline: none;
+    border-color: #ccc;
+    box-shadow: none;
+}
+/* ===== TOAST MESSAGE ===== */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #4caf50;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(20px);
+    z-index: 9999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 0.8rem 1.6rem;
+    background-color: var(--color-mahogany);
+    color: var(--color-parchment);
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.button-link:hover {
+    background-color: var(--color-chestnut);
+    transform: translateY(-2px);
+}
+
+.button-link:active {
+    background-color: var(--color-leather);
+    transform: translateY(0);
+}
+

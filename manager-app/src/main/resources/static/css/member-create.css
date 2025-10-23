@@ -1,0 +1,118 @@
+
+
+/* Контейнер для ячейки с полем ввода */
+.member-details td.form-cell {
+    /* Уменьшаем отступы, чтобы input и ошибка поместились */
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
+/* Стилизация подсказки '?' */
+.member-details th .hint {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    text-align: center;
+    background-color: var(--color-parchment);
+    color: var(--color-mahogany);
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+    cursor: help;
+    position: relative; /* Для всплывающей подсказки */
+    vertical-align: middle;
+}
+
+/* Простая CSS-подсказка при наведении */
+.member-details th .hint:hover::after {
+    content: attr(data-hint);
+    position: absolute;
+    bottom: 125%; /* Появляется над '?' */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-mahogany);
+    color: var(--color-parchment);
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 400; /* Обычный шрифт для подсказки */
+    width: 280px; /* Ширина подсказки */
+    text-align: left;
+    z-index: 10;
+    white-space: normal; /* Позволяет перенос текста */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Стилизация текста ошибки валидации */
+.error-message {
+    color: #b33a3a; /* Более темный красный */
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-bottom: 0; /* Убираем лишний отступ */
+}
+
+/* Стилизация поля ввода с ошибкой */
+.inline-input.input-error {
+    border-color: #b33a3a;
+    background-color: #fff2f2; /* Легкий красный фон */
+}
+
+.inline-input.input-error:focus {
+    border-color: #b33a3a;
+    box-shadow: 0 0 5px rgba(179, 58, 58, 0.4);
+}
+
+/* Стили для кнопок "Отмена" и "Сохранить" */
+.action-buttons .button-link.cancel {
+    background-color: #888;
+}
+.action-buttons .button-link.cancel:hover {
+    background-color: #666;
+}
+
+.member-details th label {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.edit-form-table {
+    padding: 0.9rem;
+}
+.table-wrapper {
+    padding: inherit
+}
+.member-details {
+    overflow: visible;
+    table-layout: fixed;
+}
+
+.member-details tr:first-child th {
+    border-top-left-radius: var(--radius);
+}
+
+.member-details tr:first-child td {
+    border-top-right-radius: var(--radius);
+}
+
+.member-details tr:last-child th {
+    border-bottom-left-radius: var(--radius);
+}
+
+.member-details tr:last-child td {
+    border-bottom-right-radius: var(--radius);
+}
+.edit-form-table {
+    width: 100%;
+}
+.button-link.cancel {
+    padding: 0.76rem 1.6rem;
+    border: none;
+    line-height: 1.2;
+
+    position: relative;
+
+    transform: translateY(2px);
+}

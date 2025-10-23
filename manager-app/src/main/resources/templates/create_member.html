@@ -3,302 +3,618 @@
 <head>
     <meta charset="UTF-8">
     <title>Создание нового члена НКСО</title>
-    <link rel="stylesheet" th:href="@{~/css/member-form.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/member-view.css}">
+    <link rel="stylesheet" th:href="@{/css/member-create.css}">
+    <link rel="stylesheet" th:href="@{/css/filter-form.css}">
+    <link rel="stylesheet" th:href="@{/css/header-filter-form.css}">
 </head>
 <body>
 <div th:insert="~{header :: header}"></div>
-<form th:action="@{/members/create}" th:method="post" th:object="${member}">
-    <div class="field-row">
-        <label th:for="*{registryNum}" th:text="#{member.registryNum}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.registryNum}">?</span>
-        <input th:field="*{registryNum}" type="text" required/>
+<main>
+    <h2 th:text="#{member.create}">Создание нового члена НКСО</h2>
+    <div th:if="${saveIsSuccessful}" class="toast show" style="background-color:#4caf50;">
+        ✅ Изменения сохранены!
     </div>
-    <p th:errors="*{registryNum}" class="error"></p>
+    <form th:action="@{/members/create}"
+          th:object="${member}"
+          th:method="post"
+          class="edit-form-table">
+        <div class="table-wrapper">
+            <table class="member-details">
+                <tbody>
+                <tr>
+                    <th>
+                        <label th:for="registryNum" th:text="#{member.registryNum}"></label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.registryNum}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{registryNum}" type="text"
+                               id="registryNum"
+                               th:classappend="${#fields.hasErrors('registryNum')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('registryNum')}"
+                           th:errors="*{registryNum}" class="error-message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label th:for="dateAddedToRegistry" th:text="#{member.dateAddedToRegistry}">Дата внесения</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.dateAddedToRegistry}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{dateAddedToRegistry}" type="text"
+                               placeholder="дд.мм.гггг"
+                               pattern="\d{2}.\d{2}.\d{4}"
+                               id="dateAddedToRegistry" maxlength="10" inputmode="numeric" autocomplete="off"
+                               th:classappend="${#fields.hasErrors('dateAddedToRegistry')} ? 'input-error' : ''"/>
 
-    <div class="field-row">
-        <label th:text="#{member.dateAddedToRegistry}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.dateAddedToRegistry}">?</span>
-        <input th:field="*{dateAddedToRegistry}" type="text" placeholder="дд.мм.гггг" pattern="\d{2}.\d{2}.\d{4}" id="dateAddedToRegistry" maxlength="10" inputmode="numeric" autocomplete="off"/>
-    </div>
-    <p th:errors="*{dateAddedToRegistry}" class="error"></p>
+                        <p th:if="${#fields.hasErrors('dateAddedToRegistry')}"
+                           th:errors="*{dateAddedToRegistry}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.textDateAddedToRegistry}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.textDateAddedToRegistry}">?</span>
-        <input th:field="*{textDateAddedToRegistry}" type="text"/>
-    </div>
-    <p th:errors="*{textDateAddedToRegistry}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="textDateAddedToRegistry" th:text="#{member.textDateAddedToRegistry}">Дата (текст)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.textDateAddedToRegistry}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{textDateAddedToRegistry}" type="text"
+                               id="textDateAddedToRegistry"
+                               th:classappend="${#fields.hasErrors('textDateAddedToRegistry')} ? 'input-error' : ''"/>
 
-    <div class="field-row">
-        <label th:text="#{member.fullTextDateAddedToRegistry}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.fullTextDateAddedToRegistry}">?</span>
-        <input th:field="*{fullTextDateAddedToRegistry}" type="text"/>
-    </div>
-    <p th:errors="*{fullTextDateAddedToRegistry}" class="error"></p>
+                        <p th:if="${#fields.hasErrors('textDateAddedToRegistry')}"
+                           th:errors="*{textDateAddedToRegistry}" class="error-message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <label th:for="fullTextDateAddedToRegistry" th:text="#{member.fullTextDateAddedToRegistry}">Полная текст. дата</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.fullTextDateAddedToRegistry}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{fullTextDateAddedToRegistry}" type="text"
+                               id="fullTextDateAddedToRegistry"
+                               th:classappend="${#fields.hasErrors('fullTextDateAddedToRegistry')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('fullTextDateAddedToRegistry')}"
+                           th:errors="*{fullTextDateAddedToRegistry}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.subjectRf}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.subjectRf}">?</span>
-        <input th:field="*{subjectRf}" type="text"/>
-    </div>
-    <p th:errors="*{subjectRf}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="subjectRf" th:text="#{member.subjectRf}">Субъект РФ</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.subjectRf}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{subjectRf}" type="text"
+                               id="subjectRf"
+                               th:classappend="${#fields.hasErrors('subjectRf')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('subjectRf')}"
+                           th:errors="*{subjectRf}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.city}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.city}">?</span>
-        <input th:field="*{city}" type="text"/>
-    </div>
-    <p th:errors="*{city}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="city" th:text="#{member.city}">Город</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.city}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{city}" type="text"
+                               id="city"
+                               th:classappend="${#fields.hasErrors('city')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('city')}"
+                           th:errors="*{city}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.regionPartnership}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.regionPartnership}">?</span>
-        <input th:field="*{regionPartnership}" type="text"/>
-    </div>
-    <p th:errors="*{regionPartnership}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="regionPartnership" th:text="#{member.regionPartnership}">Рег. партнерство</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.regionPartnership}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{regionPartnership}" type="text"
+                               id="regionPartnership"
+                               th:classappend="${#fields.hasErrors('regionPartnership')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('regionPartnership')}"
+                           th:errors="*{regionPartnership}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.rpCode}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.rpCode}">?</span>
-        <input th:field="*{rpCode}" type="text"/>
-    </div>
-    <p th:errors="*{rpCode}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="rpCode" th:text="#{member.rpCode}">Код РП</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.rpCode}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{rpCode}" type="text"
+                               id="rpCode"
+                               th:classappend="${#fields.hasErrors('rpCode')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('rpCode')}"
+                           th:errors="*{rpCode}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.lastname}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.lastname}">?</span>
-        <input th:field="*{lastname}" type="text"/>
-    </div>
-    <p th:errors="*{lastname}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="lastname" th:text="#{member.lastname}">Фамилия</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.lastname}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{lastname}" type="text"
+                               id="lastname"
+                               th:classappend="${#fields.hasErrors('lastname')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('lastname')}"
+                           th:errors="*{lastname}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.firstname}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.firstname}">?</span>
-        <input th:field="*{firstname}" type="text"/>
-    </div>
-    <p th:errors="*{firstname}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="firstname" th:text="#{member.firstname}">Имя</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.firstname}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{firstname}" type="text"
+                               id="firstname"
+                               th:classappend="${#fields.hasErrors('firstname')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('firstname')}"
+                           th:errors="*{firstname}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.middlename}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.middlename}">?</span>
-        <input th:field="*{middlename}" type="text"/>
-    </div>
-    <p th:errors="*{middlename}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="middlename" th:text="#{member.middlename}">Отчество</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.middlename}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{middlename}" type="text"
+                               id="middlename"
+                               th:classappend="${#fields.hasErrors('middlename')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('middlename')}"
+                           th:errors="*{middlename}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.dateOfBirth}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.dateOfBirth}">?</span>
-        <input th:field="*{dateOfBirth}"  type="text" placeholder="дд.мм.гггг" pattern="\d{2}.\d{2}.\d{4}" id="dateOfBirth" maxlength="10" inputmode="numeric" autocomplete="off"/>
-    </div>
-    <p th:errors="*{dateOfBirth}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="dateOfBirth" th:text="#{member.dateOfBirth}">Дата рождения</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.dateOfBirth}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{dateOfBirth}" type="text" placeholder="дд.мм.гггг"
+                               pattern="\d{2}.\d{2}.\d{4}"
+                               id="dateOfBirth" maxlength="10" inputmode="numeric" autocomplete="off"
+                               th:classappend="${#fields.hasErrors('dateOfBirth')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('dateOfBirth')}"
+                           th:errors="*{dateOfBirth}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.birthPlace}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.birthPlace}">?</span>
-        <input th:field="*{birthPlace}" type="text"/>
-    </div>
-    <p th:errors="*{birthPlace}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="birthPlace" th:text="#{member.birthPlace}">Место рождения</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.birthPlace}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{birthPlace}" type="text"
+                               id="birthPlace"
+                               th:classappend="${#fields.hasErrors('birthPlace')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('birthPlace')}"
+                           th:errors="*{birthPlace}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.tin}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.tin}">?</span>
-        <input th:field="*{tin}" type="text"/>
-    </div>
-    <p th:errors="*{tin}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="tin" th:text="#{member.tin}">ИНН</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.tin}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{tin}" type="text"
+                               id="tin"
+                               th:classappend="${#fields.hasErrors('tin')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('tin')}"
+                           th:errors="*{tin}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.ssn}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.ssn}">?</span>
-        <input th:field="*{ssn}" type="text"/>
-    </div>
-    <p th:errors="*{ssn}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="ssn" th:text="#{member.ssn}">СНИЛС</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.ssn}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{ssn}" type="text"
+                               id="ssn"
+                               th:classappend="${#fields.hasErrors('ssn')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('ssn')}"
+                           th:errors="*{ssn}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.membershipInRp}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.membershipInRp}">?</span>
-        <input th:field="*{membershipInRp}" type="text"/>
-    </div>
-    <p th:errors="*{membershipInRp}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="membershipInRp" th:text="#{member.membershipInRp}">Членство в РП</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.membershipInRp}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{membershipInRp}" type="text"
+                               id="membershipInRp"
+                               th:classappend="${#fields.hasErrors('membershipInRp')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('membershipInRp')}"
+                           th:errors="*{membershipInRp}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.registerNumInRp}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.registerNumInRp}">?</span>
-        <input th:field="*{registerNumInRp}" type="text"/>
-    </div>
-    <p th:errors="*{registerNumInRp}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="registerNumInRp" th:text="#{member.registerNumInRp}">Рег. номер в РП</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.registerNumInRp}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{registerNumInRp}" type="text"
+                               id="registerNumInRp"
+                               th:classappend="${#fields.hasErrors('registerNumInRp')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('registerNumInRp')}"
+                           th:errors="*{registerNumInRp}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.dateJoiningRp}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.dateJoiningRp}">?</span>
-        <input th:field="*{dateJoiningRp}"  type="text" placeholder="дд.мм.гггг" pattern="\d{2}.\d{2}.\d{4}" id="dateJoiningRp" maxlength="10" inputmode="numeric" autocomplete="off"/>
-    </div>
-    <p th:errors="*{dateJoiningRp}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="dateJoiningRp" th:text="#{member.dateJoiningRp}">Дата вступления в РП</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.dateJoiningRp}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{dateJoiningRp}" type="text" placeholder="дд.мм.гггг"
+                               pattern="\d{2}.\d{2}.\d{4}"
+                               id="dateJoiningRp" maxlength="10" inputmode="numeric" autocomplete="off"
+                               th:classappend="${#fields.hasErrors('dateJoiningRp')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('dateJoiningRp')}"
+                           th:errors="*{dateJoiningRp}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.dateExclusionFromRp}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.dateExclusionFromRp}">?</span>
-        <input th:field="*{dateExclusionFromRp}"  type="text" placeholder="дд.мм.гггг" pattern="\d{2}.\d{2}.\d{4}" id="dateExclusionFromRp" maxlength="10" inputmode="numeric" autocomplete="off"/>
-    </div>
-    <p th:errors="*{dateExclusionFromRp}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="dateExclusionFromRp" th:text="#{member.dateExclusionFromRp}">Дата исключения из РП</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.dateExclusionFromRp}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{dateExclusionFromRp}" type="text" placeholder="дд.мм.гггг"
+                               pattern="\d{2}.\d{2}.\d{4}"
+                               id="dateExclusionFromRp" maxlength="10" inputmode="numeric" autocomplete="off"
+                               th:classappend="${#fields.hasErrors('dateExclusionFromRp')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('dateExclusionFromRp')}"
+                           th:errors="*{dateExclusionFromRp}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.totalWorkExperience}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.totalWorkExperience}">?</span>
-        <input th:field="*{totalWorkExperience}" type="text"/>
-    </div>
-    <p th:errors="*{totalWorkExperience}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="totalWorkExperience" th:text="#{member.totalWorkExperience}">Общий стаж</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.totalWorkExperience}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{totalWorkExperience}" type="text"
+                               id="totalWorkExperience"
+                               th:classappend="${#fields.hasErrors('totalWorkExperience')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('totalWorkExperience')}"
+                           th:errors="*{totalWorkExperience}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.evaluatedWorkExperience}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.evaluatedWorkExperience}">?</span>
-        <input th:field="*{evaluatedWorkExperience}" type="text"/>
-    </div>
-    <p th:errors="*{evaluatedWorkExperience}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="evaluatedWorkExperience" th:text="#{member.evaluatedWorkExperience}">Оценочный стаж</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.evaluatedWorkExperience}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{evaluatedWorkExperience}" type="text"
+                               id="evaluatedWorkExperience"
+                               th:classappend="${#fields.hasErrors('evaluatedWorkExperience')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('evaluatedWorkExperience')}"
+                           th:errors="*{evaluatedWorkExperience}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.assessmentWorkExperience}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.assessmentWorkExperience}">?</span>
-        <input th:field="*{assessmentWorkExperience}"  type="text" placeholder="дд.мм.гггг" pattern="\d{2}.\d{2}.\d{4}" id="assessmentWorkExperience" maxlength="10" inputmode="numeric" autocomplete="off"/>
-    </div>
-    <p th:errors="*{assessmentWorkExperience}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="assessmentWorkExperience" th:text="#{member.assessmentWorkExperience}">Стаж ОД (дата)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.assessmentWorkExperience}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{assessmentWorkExperience}" type="text" placeholder="дд.мм.гггг"
+                               pattern="\d{2}.\d{2}.\d{4}" id="assessmentWorkExperience" maxlength="10" inputmode="numeric"
+                               autocomplete="off"
+                               th:classappend="${#fields.hasErrors('assessmentWorkExperience')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('assessmentWorkExperience')}"
+                           th:errors="*{assessmentWorkExperience}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.passport}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.passport}">?</span>
-        <input th:field="*{passport}" type="text"/>
-    </div>
-    <p th:errors="*{passport}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="passport" th:text="#{member.passport}">Паспорт</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.passport}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{passport}" type="text"
+                               id="passport"
+                               th:classappend="${#fields.hasErrors('passport')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('passport')}"
+                           th:errors="*{passport}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.registrationAddress}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.registrationAddress}">?</span>
-        <input th:field="*{registrationAddress}" type="text"/>
-    </div>
-    <p th:errors="*{registrationAddress}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="registrationAddress" th:text="#{member.registrationAddress}">Адрес регистрации</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.registrationAddress}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{registrationAddress}" type="text"
+                               id="registrationAddress"
+                               th:classappend="${#fields.hasErrors('registrationAddress')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('registrationAddress')}"
+                           th:errors="*{registrationAddress}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.correspondenceAddress}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.correspondenceAddress}">?</span>
-        <input th:field="*{correspondenceAddress}" type="text"/>
-    </div>
-    <p th:errors="*{correspondenceAddress}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="correspondenceAddress" th:text="#{member.correspondenceAddress}">Адрес для корреспонденции</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.correspondenceAddress}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{correspondenceAddress}" type="text"
+                               id="correspondenceAddress"
+                               th:classappend="${#fields.hasErrors('correspondenceAddress')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('correspondenceAddress')}"
+                           th:errors="*{correspondenceAddress}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.memberEmailNkso}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso}">?</span>
-        <input th:field="*{memberEmailNkso}" type="text"/>
-    </div>
-    <p th:errors="*{memberEmailNkso}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="memberEmailNkso" th:text="#{member.memberEmailNkso}">Email НКСО</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{memberEmailNkso}" type="text"
+                               id="memberEmailNkso"
+                               th:classappend="${#fields.hasErrors('memberEmailNkso')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('memberEmailNkso')}"
+                           th:errors="*{memberEmailNkso}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.memberEmailNkso2}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso2}">?</span>
-        <input th:field="*{memberEmailNkso2}" type="text"/>
-    </div>
-    <p th:errors="*{memberEmailNkso2}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="memberEmailNkso2" th:text="#{member.memberEmailNkso2}">Email НКСО 2</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso2}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{memberEmailNkso2}" type="text"
+                               id="memberEmailNkso2"
+                               th:classappend="${#fields.hasErrors('memberEmailNkso2')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('memberEmailNkso2')}"
+                           th:errors="*{memberEmailNkso2}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.cityPhoneCode}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.cityPhoneCode}">?</span>
-        <input th:field="*{cityPhoneCode}" type="text"/>
-    </div>
-    <p th:errors="*{cityPhoneCode}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="cityPhoneCode" th:text="#{member.cityPhoneCode}">Код города</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.cityPhoneCode}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{cityPhoneCode}" type="text"
+                               id="cityPhoneCode"
+                               th:classappend="${#fields.hasErrors('cityPhoneCode')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('cityPhoneCode')}"
+                           th:errors="*{cityPhoneCode}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.contactPhone}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.contactPhone}">?</span>
-        <input th:field="*{contactPhone}" type="text"/>
-    </div>
-    <p th:errors="*{contactPhone}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="contactPhone" th:text="#{member.contactPhone}">Телефон</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.contactPhone}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{contactPhone}" type="text"
+                               id="contactPhone"
+                               th:classappend="${#fields.hasErrors('contactPhone')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('contactPhone')}"
+                           th:errors="*{contactPhone}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.mobilePhone}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.mobilePhone}">?</span>
-        <input th:field="*{mobilePhone}" type="text"/>
-    </div>
-    <p th:errors="*{mobilePhone}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="mobilePhone" th:text="#{member.mobilePhone}">Моб. телефон</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.mobilePhone}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{mobilePhone}" type="text"
+                               id="mobilePhone"
+                               th:classappend="${#fields.hasErrors('mobilePhone')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('mobilePhone')}"
+                           th:errors="*{mobilePhone}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.textCertificateNumCriminalRecord}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.textCertificateNumCriminalRecord}">?</span>
-        <input th:field="*{textCertificateNumCriminalRecord}" type="text"/>
-    </div>
-    <p th:errors="*{textCertificateNumCriminalRecord}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="textCertificateNumCriminalRecord" th:text="#{member.textCertificateNumCriminalRecord}">Справка (текст)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.textCertificateNumCriminalRecord}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{textCertificateNumCriminalRecord}" type="text"
+                               id="textCertificateNumCriminalRecord"
+                               th:classappend="${#fields.hasErrors('textCertificateNumCriminalRecord')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('textCertificateNumCriminalRecord')}"
+                           th:errors="*{textCertificateNumCriminalRecord}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.certificateNumCriminalRecord}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.certificateNumCriminalRecord}">?</span>
-        <input th:field="*{certificateNumCriminalRecord}" type="text"/>
-    </div>
-    <p th:errors="*{certificateNumCriminalRecord}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="certificateNumCriminalRecord" th:text="#{member.certificateNumCriminalRecord}">Справка (номер)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.certificateNumCriminalRecord}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{certificateNumCriminalRecord}" type="text"
+                               id="certificateNumCriminalRecord"
+                               th:classappend="${#fields.hasErrors('certificateNumCriminalRecord')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('certificateNumCriminalRecord')}"
+                           th:errors="*{certificateNumCriminalRecord}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.textCertificateDateCriminalRecord}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.textCertificateDateCriminalRecord}">?</span>
-        <input th:field="*{textCertificateDateCriminalRecord}" type="text"/>
-    </div>
-    <p th:errors="*{textCertificateDateCriminalRecord}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="textCertificateDateCriminalRecord" th:text="#{member.textCertificateDateCriminalRecord}">Справка (дата, текст)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.textCertificateDateCriminalRecord}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{textCertificateDateCriminalRecord}" type="text"
+                               id="textCertificateDateCriminalRecord"
+                               th:classappend="${#fields.hasErrors('textCertificateDateCriminalRecord')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('textCertificateDateCriminalRecord')}"
+                           th:errors="*{textCertificateDateCriminalRecord}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.certificateDateCriminalRecord}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.certificateDateCriminalRecord}">?</span>
-        <input th:field="*{certificateDateCriminalRecord}"  type="text" placeholder="дд.мм.гггг" pattern="\d{2}.\d{2}.\d{4}" id="certificateDateCriminalRecord" maxlength="10" inputmode="numeric" autocomplete="off"/>
-    </div>
-    <p th:errors="*{certificateDateCriminalRecord}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="certificateDateCriminalRecord" th:text="#{member.certificateDateCriminalRecord}">Справка (дата)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.certificateDateCriminalRecord}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{certificateDateCriminalRecord}" type="text"
+                               placeholder="дд.мм.гггг"
+                               pattern="\d{2}.\d{2}.\d{4}" id="certificateDateCriminalRecord" maxlength="10" inputmode="numeric"
+                               autocomplete="off"
+                               th:classappend="${#fields.hasErrors('certificateDateCriminalRecord')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('certificateDateCriminalRecord')}"
+                           th:errors="*{certificateDateCriminalRecord}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.tCertificateDateCriminalRecord}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.tCertificateDateCriminalRecord}">?</span>
-        <input th:field="*{tCertificateDateCriminalRecord}" type="text"/>
-    </div>
-    <p th:errors="*{tCertificateDateCriminalRecord}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="tCertificateDateCriminalRecord" th:text="#{member.tCertificateDateCriminalRecord}">Справка (t дата)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.tCertificateDateCriminalRecord}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{tCertificateDateCriminalRecord}" type="text"
+                               id="tCertificateDateCriminalRecord"
+                               th:classappend="${#fields.hasErrors('tCertificateDateCriminalRecord')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('tCertificateDateCriminalRecord')}"
+                           th:errors="*{tCertificateDateCriminalRecord}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.dateChangeInRegisterMembers}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.dateChangeInRegisterMembers}">?</span>
-        <input th:field="*{dateChangeInRegisterMembers}" type="text"/>
-    </div>
-    <p th:errors="*{dateChangeInRegisterMembers}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="dateChangeInRegisterMembers" th:text="#{member.dateChangeInRegisterMembers}">Дата изм. в реестре</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.dateChangeInRegisterMembers}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{dateChangeInRegisterMembers}" type="text"
+                               id="dateChangeInRegisterMembers"
+                               th:classappend="${#fields.hasErrors('dateChangeInRegisterMembers')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('dateChangeInRegisterMembers')}"
+                           th:errors="*{dateChangeInRegisterMembers}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.dateChangeMembers}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.dateChangeMembers}">?</span>
-        <input th:field="*{dateChangeMembers}" type="text"/>
-    </div>
-    <p th:errors="*{dateChangeMembers}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="dateChangeMembers" th:text="#{member.dateChangeMembers}">Дата изм. (члены)</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.dateChangeMembers}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{dateChangeMembers}" type="text"
+                               id="dateChangeMembers"
+                               th:classappend="${#fields.hasErrors('dateChangeMembers')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('dateChangeMembers')}"
+                           th:errors="*{dateChangeMembers}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.dateModificationMembers}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.dateModificationMembers}">?</span>
-        <input th:field="*{dateModificationMembers}" type="text"/>
-    </div>
-    <p th:errors="*{dateModificationMembers}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="dateModificationMembers" th:text="#{member.dateModificationMembers}">Дата модификации</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.dateModificationMembers}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{dateModificationMembers}" type="text"
+                               id="dateModificationMembers"
+                               th:classappend="${#fields.hasErrors('dateModificationMembers')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('dateModificationMembers')}"
+                           th:errors="*{dateModificationMembers}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.needToChangeMembers}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.needToChangeMembers}">?</span>
-        <input th:field="*{needToChangeMembers}" type="text"/>
-    </div>
-    <p th:errors="*{needToChangeMembers}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="needToChangeMembers" th:text="#{member.needToChangeMembers}">Нужно изменить</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.needToChangeMembers}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{needToChangeMembers}" type="text"
+                               id="needToChangeMembers"
+                               th:classappend="${#fields.hasErrors('needToChangeMembers')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('needToChangeMembers')}"
+                           th:errors="*{needToChangeMembers}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.adequacyNksoMember}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.adequacyNksoMember}">?</span>
-        <input th:field="*{adequacyNksoMember}" type="text"/>
-    </div>
-    <p th:errors="*{adequacyNksoMember}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="adequacyNksoMember" th:text="#{member.adequacyNksoMember}">Адекватность</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.adequacyNksoMember}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{adequacyNksoMember}" type="text"
+                               id="adequacyNksoMember"
+                               th:classappend="${#fields.hasErrors('adequacyNksoMember')} ? 'input-error' : ''"/>
+                        <p th:if="${#fields.hasErrors('adequacyNksoMember')}"
+                           th:errors="*{adequacyNksoMember}" class="error-message"></p>
+                    </td>
+                </tr>
 
-    <div class="field-row">
-        <label th:text="#{member.noteNksoMember}"></label>
-        <span class="hint" th:attr="data-hint=#{member.hint.noteNksoMember}">?</span>
-        <input th:field="*{noteNksoMember}" type="text"/>
-    </div>
-    <p th:errors="*{noteNksoMember}" class="error"></p>
+                <tr>
+                    <th>
+                        <label th:for="noteNksoMember" th:text="#{member.noteNksoMember}">Примечание</label>
+                        <span class="hint" th:attr="data-hint=#{member.hint.noteNksoMember}">?</span>
+                    </th>
+                    <td class="form-cell">
+                        <input class="inline-input" th:field="*{noteNksoMember}" type="text"
+                               id="noteNksoMember"
+                               th:classappend="${#fields.hasErrors('noteNksoMember')} ? 'input-error' : ''"/>
 
-    <div style="margin-top: 1em;">
-        <button type="submit" th:text="#{member.saveButton}">Сохранить</button>
-    </div>
-</form>
+                        <p th:if="${#fields.hasErrors('noteNksoMember')}"
+                           th:errors="*{noteNksoMember}" class="error-message"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="action-buttons">
+            <button type="submit" class="button-link save">Сохранить</button>
+            <a th:href="@{/members}"
+               class="button-link cancel">Отмена</a>
+        </div>
+    </form>
+</main>
 <script th:src="@{/js/date-mask.js}"></script>
 </body>
 </html>

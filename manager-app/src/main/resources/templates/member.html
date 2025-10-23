@@ -3,180 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${member.firstname + ' ' + member.lastname}">Член НКСО</title>
-    <styles th:src="@{/static/css/members-view.css}"></styles>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/member-view.css}">
+    <link rel="stylesheet" th:href="@{/css/filter-form.css}">
+    <link rel="stylesheet" th:href="@{/css/header-filter-form.css}">
 </head>
 <body>
 <div th:insert="~{header :: header}"></div>
-
-<h2>Информация о члене НКСО</h2>
-<table th:object="${member}">
-    <tbody>
-    <tr>
-        <th th:text="#{member.registryNum}">Регистрационный номер</th>
-        <td th:text="*{registryNum}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.dateAddedToRegistry}">Дата внесения в реестр</th>
-        <td th:text="${#temporals.format(member.dateAddedToRegistry, 'dd.MM.yyyy')}" class="date"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.textDateAddedToRegistry}"></th>
-        <td th:text="*{textDateAddedToRegistry}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.fullTextDateAddedToRegistry}"></th>
-        <td th:text="*{fullTextDateAddedToRegistry}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.subjectRf}"></th>
-        <td th:text="*{subjectRf}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.city}"></th>
-        <td th:text="*{city}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.regionPartnership}"></th>
-        <td th:text="*{regionPartnership}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.rpCode}"></th>
-        <td th:text="*{rpCode}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.lastname}"></th>
-        <td th:text="*{lastname}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.firstname}"></th>
-        <td th:text="*{firstname}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.middlename}"></th>
-        <td th:text="*{middlename}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.dateOfBirth}"></th>
-        <td th:text="${#temporals.format(member.dateOfBirth, 'dd.MM.yyyy')}" class="date"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.birthPlace}"></th>
-        <td th:text="*{birthPlace}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.tin}"></th>
-        <td th:text="*{tin}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.ssn}"></th>
-        <td th:text="*{ssn}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.membershipInRp}"></th>
-        <td th:text="*{membershipInRp}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.registerNumInRp}"></th>
-        <td th:text="*{registerNumInRp}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.dateJoiningRp}"></th>
-        <td th:text="${#temporals.format(member.dateJoiningRp, 'dd.MM.yyyy')}" class="date"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.dateExclusionFromRp}"></th>
-        <td th:text="${#temporals.format(member.dateExclusionFromRp, 'dd.MM.yyyy')}" class="date"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.totalWorkExperience}"></th>
-        <td th:text="*{totalWorkExperience}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.evaluatedWorkExperience}"></th>
-        <td th:text="*{evaluatedWorkExperience}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.assessmentWorkExperience}"></th>
-        <td th:text="${#temporals.format(member.assessmentWorkExperience, 'dd.MM.yyyy')}" class="date"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.passport}"></th>
-        <td th:text="*{passport}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.registrationAddress}"></th>
-        <td th:text="*{registrationAddress}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.correspondenceAddress}"></th>
-        <td th:text="*{correspondenceAddress}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.memberEmailNkso}"></th>
-        <td th:text="*{memberEmailNkso}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.memberEmailNkso2}"></th>
-        <td th:text="*{memberEmailNkso2}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.cityPhoneCode}"></th>
-        <td th:text="*{cityPhoneCode}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.contactPhone}"></th>
-        <td th:text="*{contactPhone}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.mobilePhone}"></th>
-        <td th:text="*{mobilePhone}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.textCertificateNumCriminalRecord}"></th>
-        <td th:text="*{textCertificateNumCriminalRecord}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.certificateNumCriminalRecord}"></th>
-        <td th:text="*{certificateNumCriminalRecord}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.textCertificateDateCriminalRecord}"></th>
-        <td th:text="*{textCertificateDateCriminalRecord}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.certificateDateCriminalRecord}"></th>
-        <td th:text="${#temporals.format(member.certificateDateCriminalRecord, 'dd.MM.yyyy')}" class="date"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.tCertificateDateCriminalRecord}"></th>
-        <td th:text="*{tCertificateDateCriminalRecord}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.dateChangeInRegisterMembers}"></th>
-        <td th:text="*{dateChangeInRegisterMembers}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.dateChangeMembers}"></th>
-        <td th:text="*{dateChangeMembers}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.dateModificationMembers}"></th>
-        <td th:text="*{dateModificationMembers}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.needToChangeMembers}"></th>
-        <td th:text="*{needToChangeMembers}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.adequacyNksoMember}"></th>
-        <td th:text="*{adequacyNksoMember}"></td>
-    </tr>
-    <tr>
-        <th th:text="#{member.noteNksoMember}"></th>
-        <td th:text="*{noteNksoMember}"></td>
-    </tr>
-    </tbody>
-</table>
-<input type="button" th:onclick="|location.href='@{/members/{registryNum}/edit(registryNum=${member.registryNum})}'|" value="Редактировать">
+<main>
+    <h2>Информация о члене НКСО</h2>
+    <div class="table-wrapper">
+        <table th:object="${member}" class="member-details" th:data-save-success="${saveIsSuccessful}">
+            <tbody>
+            <tr>
+                <th th:text="#{member.registryNum}">Регистрационный номер</th>
+                <td th:text="*{registryNum}" data-field="registryNum"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.dateAddedToRegistry}">Дата внесения в реестр</th>
+                <td th:text="${#temporals.format(member.dateAddedToRegistry, 'dd.MM.yyyy')}" class="date"
+                    data-field="dateAddedToRegistry"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.textDateAddedToRegistry}"></th>
+                <td th:text="*{textDateAddedToRegistry}" data-field="textDateAddedToRegistry"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.fullTextDateAddedToRegistry}"></th>
+                <td th:text="*{fullTextDateAddedToRegistry}" data-field="fullTextDateAddedToRegistry"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.subjectRf}"></th>
+                <td th:text="*{subjectRf}" data-field="subjectRf"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.city}"></th>
+                <td th:text="*{city}" data-field="city"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.regionPartnership}"></th>
+                <td th:text="*{regionPartnership}" data-field="regionPartnership"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.rpCode}"></th>
+                <td th:text="*{rpCode}" data-field="rpCode"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.lastname}"></th>
+                <td th:text="*{lastname}" data-field="lastname"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.firstname}"></th>
+                <td th:text="*{firstname}" data-field="firstname"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.middlename}"></th>
+                <td th:text="*{middlename}" data-field="middlename"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.dateOfBirth}"></th>
+                <td th:text="${#temporals.format(member.dateOfBirth, 'dd.MM.yyyy')}" class="date"
+                    data-field="dateOfBirth"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.birthPlace}"></th>
+                <td th:text="*{birthPlace}" data-field="birthPlace"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.tin}"></th>
+                <td th:text="*{tin}" data-field="tin"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.ssn}"></th>
+                <td th:text="*{ssn}" data-field="ssn"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.membershipInRp}"></th>
+                <td th:text="*{membershipInRp}" data-field="membershipInRp"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.registerNumInRp}"></th>
+                <td th:text="*{registerNumInRp}" data-field="registerNumInRp"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.dateJoiningRp}"></th>
+                <td th:text="${#temporals.format(member.dateJoiningRp, 'dd.MM.yyyy')}" class="date"
+                    data-field="dateJoiningRp"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.dateExclusionFromRp}"></th>
+                <td th:text="${#temporals.format(member.dateExclusionFromRp, 'dd.MM.yyyy')}" class="date"
+                    data-field="dateExclusionFromRp"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.totalWorkExperience}"></th>
+                <td th:text="*{totalWorkExperience}" data-field="totalWorkExperience"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.evaluatedWorkExperience}"></th>
+                <td th:text="*{evaluatedWorkExperience}" data-field="evaluatedWorkExperience"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.assessmentWorkExperience}"></th>
+                <td th:text="${#temporals.format(member.assessmentWorkExperience, 'dd.MM.yyyy')}" class="date"
+                    data-field="assessmentWorkExperience"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.passport}"></th>
+                <td th:text="*{passport}" data-field="passport"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.registrationAddress}"></th>
+                <td th:text="*{registrationAddress}" data-field="registrationAddress"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.correspondenceAddress}"></th>
+                <td th:text="*{correspondenceAddress}" data-field="correspondenceAddress"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.memberEmailNkso}"></th>
+                <td th:text="*{memberEmailNkso}" data-field="memberEmailNkso"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.memberEmailNkso2}"></th>
+                <td th:text="*{memberEmailNkso2}" data-field="memberEmailNkso2"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.cityPhoneCode}"></th>
+                <td th:text="*{cityPhoneCode}" data-field="cityPhoneCode"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.contactPhone}"></th>
+                <td th:text="*{contactPhone}" data-field="contactPhone"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.mobilePhone}"></th>
+                <td th:text="*{mobilePhone}" data-field="mobilePhone"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.textCertificateNumCriminalRecord}"></th>
+                <td th:text="*{textCertificateNumCriminalRecord}" data-field="textCertificateNumCriminalRecord"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.certificateNumCriminalRecord}"></th>
+                <td th:text="*{certificateNumCriminalRecord}" data-field="certificateNumCriminalRecord"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.textCertificateDateCriminalRecord}"></th>
+                <td th:text="*{textCertificateDateCriminalRecord}" data-field="textCertificateDateCriminalRecord"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.certificateDateCriminalRecord}"></th>
+                <td th:text="${#temporals.format(member.certificateDateCriminalRecord, 'dd.MM.yyyy')}" class="date"
+                    data-field="certificateDateCriminalRecord"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.tCertificateDateCriminalRecord}"></th>
+                <td th:text="*{tCertificateDateCriminalRecord}" data-field="tCertificateDateCriminalRecord"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.dateChangeInRegisterMembers}"></th>
+                <td th:text="*{dateChangeInRegisterMembers}" data-field="dateChangeInRegisterMembers"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.dateChangeMembers}"></th>
+                <td th:text="*{dateChangeMembers}" data-field="dateChangeMembers"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.dateModificationMembers}"></th>
+                <td th:text="*{dateModificationMembers}" data-field="dateModificationMembers"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.needToChangeMembers}"></th>
+                <td th:text="*{needToChangeMembers}" data-field="needToChangeMembers"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.adequacyNksoMember}"></th>
+                <td th:text="*{adequacyNksoMember}" data-field="adequacyNksoMember"></td>
+            </tr>
+            <tr>
+                <th th:text="#{member.noteNksoMember}"></th>
+                <td th:text="*{noteNksoMember}" data-field="noteNksoMember"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="action-buttons">
+        <a th:href="@{'/members/' + ${member.registryNum} + '/edit'}" class="button-link">
+            Редактировать
+        </a>
+    </div>
+</main>
+<script th:src="@{/js/filter-form.js}"></script>
 </body>
 </html>

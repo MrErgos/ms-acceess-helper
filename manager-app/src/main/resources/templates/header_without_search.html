@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Header</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/filter-form.css}">
 </head>
 <body>
 <nav th:fragment="header" class="navbar">
@@ -23,14 +22,6 @@
         </li>
         <li>
             <a th:href="@{/members/create}" th:text="#{header.create_member}">Создать нового члена</a>
-        </li>
-        <li>
-            <form th:action="@{/members}" method="get" class="filter-form">
-                <label>
-                    <input type="text" name="filter" th:value="${filter}" placeholder="Поиск по реестру">
-                </label>
-                <button type="submit">Поиск</button>
-            </form>
         </li>
     </ul>
 </nav>

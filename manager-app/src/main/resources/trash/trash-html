@@ -1,0 +1,349 @@
+    <div class="member-card">
+        <form th:action="@{/members/{registryNum}/edit(registryNum=${member.registryNum})}" th:method="post"
+              th:object="${member}" class="edit-form">
+
+            <div class="field-group">
+                <div class="label-with-hint">
+                    <span th:text="#{member.registryNum}"></span>
+                    <span class="hint" th:attr="data-hint=#{member.hint.registryNum}">?</span>
+                </div>
+                <span th:text="*{registryNum}" class="readonly-value"></span>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('dateAddedToRegistry')}" th:text="#{member.dateAddedToRegistry}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.dateAddedToRegistry}">?</span>
+                <input class="input-field" th:field="*{dateAddedToRegistry}" type="text" placeholder="дд.мм.гггг"
+                       pattern="\d{2}.\d{2}.\d{4}"
+                       id="dateAddedToRegistry" maxlength="10" inputmode="numeric" autocomplete="off"/>
+                <p th:errors="*{dateAddedToRegistry}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('textDateAddedToRegistry')}" th:text="#{member.textDateAddedToRegistry}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.textDateAddedToRegistry}">?</span>
+                <input class="input-field" th:field="*{textDateAddedToRegistry}" type="text"/>
+                <p th:errors="*{textDateAddedToRegistry}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('fullTextDateAddedToRegistry')}" th:text="#{member.fullTextDateAddedToRegistry}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.fullTextDateAddedToRegistry}">?</span>
+                <input class="input-field" th:field="*{fullTextDateAddedToRegistry}" type="text"/>
+
+                <p th:errors="*{fullTextDateAddedToRegistry}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('subjectRf')}" th:text="#{member.subjectRf}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.subjectRf}">?</span>
+                <input class="input-field" th:field="*{subjectRf}" type="text"/>
+
+                <p th:errors="*{subjectRf}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('city')}" th:text="#{member.city}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.city}">?</span>
+                <input class="input-field" th:field="*{city}" type="text"/>
+
+                <p th:errors="*{city}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('regionPartnership')}" th:text="#{member.regionPartnership}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.regionPartnership}">?</span>
+                <input class="input-field" th:field="*{regionPartnership}" type="text"/>
+
+                <p th:errors="*{regionPartnership}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('rpCode')}" th:text="#{member.rpCode}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.rpCode}">?</span>
+                <input class="input-field" th:field="*{rpCode}" type="text"/>
+
+                <p th:errors="*{rpCode}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('lastname')}" th:text="#{member.lastname}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.lastname}">?</span>
+                <input class="input-field" th:field="*{lastname}" type="text"/>
+
+                <p th:errors="*{lastname}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('firstname')}" th:text="#{member.firstname}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.firstname}">?</span>
+                <input class="input-field" th:field="*{firstname}" type="text"/>
+
+                <p th:errors="*{firstname}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('middlename')}" th:text="#{member.middlename}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.middlename}">?</span>
+                <input class="input-field" th:field="*{middlename}" type="text"/>
+
+                <p th:errors="*{middlename}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('dateOfBirth')}" th:text="#{member.dateOfBirth}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.dateOfBirth}">?</span>
+                <input class="input-field" th:field="*{dateOfBirth}" type="text" placeholder="дд.мм.гггг"
+                       pattern="\d{2}.\d{2}.\d{4}"
+                       id="dateOfBirth" maxlength="10" inputmode="numeric" autocomplete="off"/>
+
+                <p th:errors="*{dateOfBirth}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('birthPlace')}" th:text="#{member.birthPlace}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.birthPlace}">?</span>
+                <input class="input-field" th:field="*{birthPlace}" type="text"/>
+
+                <p th:errors="*{birthPlace}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('tin')}" th:text="#{member.tin}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.tin}">?</span>
+                <input class="input-field" th:field="*{tin}" type="text"/>
+
+                <p th:errors="*{tin}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('ssn')}" th:text="#{member.ssn}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.ssn}">?</span>
+                <input class="input-field" th:field="*{ssn}" type="text"/>
+
+                <p th:errors="*{ssn}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('membershipInRp')}" th:text="#{member.membershipInRp}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.membershipInRp}">?</span>
+                <input class="input-field" th:field="*{membershipInRp}" type="text"/>
+
+                <p th:errors="*{membershipInRp}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('registerNumInRp')}" th:text="#{member.registerNumInRp}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.registerNumInRp}">?</span>
+                <input class="input-field" th:field="*{registerNumInRp}" type="text"/>
+
+                <p th:errors="*{registerNumInRp}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('dateJoiningRp')}" th:text="#{member.dateJoiningRp}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.dateJoiningRp}">?</span>
+                <input class="input-field" th:field="*{dateJoiningRp}" type="text" placeholder="дд.мм.гггг"
+                       pattern="\d{2}.\d{2}.\d{4}"
+                       id="dateJoiningRp" maxlength="10" inputmode="numeric" autocomplete="off"/>
+
+                <p th:errors="*{dateJoiningRp}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('dateExclusionFromRp')}" th:text="#{member.dateExclusionFromRp}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.dateExclusionFromRp}">?</span>
+                <input class="input-field" th:field="*{dateExclusionFromRp}" type="text" placeholder="дд.мм.гггг"
+                       pattern="\d{2}.\d{2}.\d{4}"
+                       id="dateExclusionFromRp" maxlength="10" inputmode="numeric" autocomplete="off"/>
+
+                <p th:errors="*{dateExclusionFromRp}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('totalWorkExperience')}" th:text="#{member.totalWorkExperience}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.totalWorkExperience}">?</span>
+                <input class="input-field" th:field="*{totalWorkExperience}" type="text"/>
+
+                <p th:errors="*{totalWorkExperience}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('evaluatedWorkExperience')}" th:text="#{member.evaluatedWorkExperience}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.evaluatedWorkExperience}">?</span>
+                <input class="input-field" th:field="*{evaluatedWorkExperience}" type="text"/>
+
+                <p th:errors="*{evaluatedWorkExperience}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('assessmentWorkExperience')}" th:text="#{member.assessmentWorkExperience}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.assessmentWorkExperience}">?</span>
+                <input class="input-field" th:field="*{assessmentWorkExperience}" type="text" placeholder="дд.мм.гггг"
+                       pattern="\d{2}.\d{2}.\d{4}" id="assessmentWorkExperience" maxlength="10" inputmode="numeric"
+                       autocomplete="off"/>
+
+                <p th:errors="*{assessmentWorkExperience}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('passport')}" th:text="#{member.passport}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.passport}">?</span>
+                <input class="input-field" th:field="*{passport}" type="text"/>
+
+                <p th:errors="*{passport}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('registrationAddress')}" th:text="#{member.registrationAddress}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.registrationAddress}">?</span>
+                <input class="input-field" th:field="*{registrationAddress}" type="text"/>
+
+                <p th:errors="*{registrationAddress}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('correspondenceAddress')}" th:text="#{member.correspondenceAddress}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.correspondenceAddress}">?</span>
+                <input class="input-field" th:field="*{correspondenceAddress}" type="text"/>
+
+                <p th:errors="*{correspondenceAddress}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('memberEmailNkso')}" th:text="#{member.memberEmailNkso}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso}">?</span>
+                <input class="input-field" th:field="*{memberEmailNkso}" type="text"/>
+
+                <p th:errors="*{memberEmailNkso}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('memberEmailNkso2')}" th:text="#{member.memberEmailNkso2}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.memberEmailNkso2}">?</span>
+                <input class="input-field" th:field="*{memberEmailNkso2}" type="text"/>
+
+                <p th:errors="*{memberEmailNkso2}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('cityPhoneCode')}" th:text="#{member.cityPhoneCode}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.cityPhoneCode}">?</span>
+                <input class="input-field" th:field="*{cityPhoneCode}" type="text"/>
+
+                <p th:errors="*{cityPhoneCode}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('contactPhone')}" th:text="#{member.contactPhone}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.contactPhone}">?</span>
+                <input class="input-field" th:field="*{contactPhone}" type="text"/>
+
+                <p th:errors="*{contactPhone}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('mobilePhone')}" th:text="#{member.mobilePhone}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.mobilePhone}">?</span>
+                <input class="input-field" th:field="*{mobilePhone}" type="text"/>
+
+                <p th:errors="*{mobilePhone}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('textCertificateNumCriminalRecord')}" th:text="#{member.textCertificateNumCriminalRecord}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.textCertificateNumCriminalRecord}">?</span>
+                <input class="input-field" th:field="*{textCertificateNumCriminalRecord}" type="text"/>
+
+                <p th:errors="*{textCertificateNumCriminalRecord}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('certificateNumCriminalRecord')}" th:text="#{member.certificateNumCriminalRecord}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.certificateNumCriminalRecord}">?</span>
+                <input class="input-field" th:field="*{certificateNumCriminalRecord}" type="text"/>
+
+                <p th:errors="*{certificateNumCriminalRecord}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('textCertificateDateCriminalRecord')}" th:text="#{member.textCertificateDateCriminalRecord}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.textCertificateDateCriminalRecord}">?</span>
+                <input class="input-field" th:field="*{textCertificateDateCriminalRecord}" type="text"/>
+
+                <p th:errors="*{textCertificateDateCriminalRecord}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('certificateDateCriminalRecord')}" th:text="#{member.certificateDateCriminalRecord}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.certificateDateCriminalRecord}">?</span>
+                <input class="input-field" th:field="*{certificateDateCriminalRecord}" type="text"
+                       placeholder="дд.мм.гггг"
+                       pattern="\d{2}.\d{2}.\d{4}" id="certificateDateCriminalRecord" maxlength="10" inputmode="numeric"
+                       autocomplete="off"/>
+
+                <p th:errors="*{certificateDateCriminalRecord}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('tCertificateDateCriminalRecord')}" th:text="#{member.tCertificateDateCriminalRecord}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.tCertificateDateCriminalRecord}">?</span>
+                <input class="input-field" th:field="*{tCertificateDateCriminalRecord}" type="text"/>
+
+                <p th:errors="*{tCertificateDateCriminalRecord}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('dateChangeInRegisterMembers')}" th:text="#{member.dateChangeInRegisterMembers}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.dateChangeInRegisterMembers}">?</span>
+                <input class="input-field" th:field="*{dateChangeInRegisterMembers}" type="text"/>
+
+                <p th:errors="*{dateChangeInRegisterMembers}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('dateChangeMembers')}" th:text="#{member.dateChangeMembers}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.dateChangeMembers}">?</span>
+                <input class="input-field" th:field="*{dateChangeMembers}" type="text"/>
+
+                <p th:errors="*{dateChangeMembers}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('dateModificationMembers')}" th:text="#{member.dateModificationMembers}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.dateModificationMembers}">?</span>
+                <input class="input-field" th:field="*{dateModificationMembers}" type="text"/>
+
+                <p th:errors="*{dateModificationMembers}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('needToChangeMembers')}" th:text="#{member.needToChangeMembers}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.needToChangeMembers}">?</span>
+                <input class="input-field" th:field="*{needToChangeMembers}" type="text"/>
+
+                <p th:errors="*{needToChangeMembers}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('adequacyNksoMember')}" th:text="#{member.adequacyNksoMember}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.adequacyNksoMember}">?</span>
+                <input class="input-field" th:field="*{adequacyNksoMember}" type="text"/>
+
+                <p th:errors="*{adequacyNksoMember}" class="error"></p>
+            </div>
+
+            <div class="field-group">
+                <label th:for="${#ids.seq('noteNksoMember')}" th:text="#{member.noteNksoMember}"></label>
+                <span class="hint" th:attr="data-hint=#{member.hint.noteNksoMember}">?</span>
+                <input class="input-field" th:field="*{noteNksoMember}" type="text"/>
+
+                <p th:errors="*{noteNksoMember}" class="error"></p>
+            </div>
+
+            <div class="action-buttons">
+                <button type="submit" class="button-link save">Сохранить</button>
+                <a th:href="@{/members/{registryNum}(registryNum=${member.registryNum})}" class="button-link cancel">Отмена</a>
+            </div>
+        </form>
+    </div>
