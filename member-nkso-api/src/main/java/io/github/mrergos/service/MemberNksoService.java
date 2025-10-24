@@ -10,10 +10,11 @@ import io.github.mrergos.entity.MemberNkso;
 import io.github.mrergos.repository.MemberNksoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
@@ -22,11 +23,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@PropertySource("classpath:page.yaml")
 public class MemberNksoService {
     private final MemberNksoRepository repository;
+    private final Environment environment;
+    private static final String templateFilter = "%%%s%%";
 
     public PageResponse<MemberNksoPayloadResponse> findAll(int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, 2);
+        Pageable pageable = PageRequest.of(pageNumber, environment.getProperty("page.size", Integer.class, 10));
         Page<MemberNkso> page = repository.findAll(pageable);
         List<MemberNksoPayloadResponse> members = page.getContent()
                 .stream()
@@ -42,9 +46,14 @@ public class MemberNksoService {
     }
 
     public PageResponse<MemberNksoPayloadResponse> findPageByFilter(String filter, int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, 2);
-        filter = "%" + filter.trim() + "%";
-        Page<MemberNkso> page = repository.findByLastnameIsLikeIgnoreCaseOrFirstnameIsLikeIgnoreCaseOrMiddlenameIsLikeIgnoreCaseOrRegistryNumIsLikeIgnoreCase(filter, filter, filter, filter, pageable);
+        Pageable pageable = PageRequest.of(pageNumber, environment.getProperty("page.size", Integer.class, 10));
+        String[] filters = filter.trim().split(" ");
+        Page<MemberNkso> page = switch (filters.length) {
+            case 1 -> repository.findMembersByFilters(templateFilter.formatted(filters[0]), pageable);
+            case 2 -> repository.findMembersByFilters(templateFilter.formatted(filters[0]), templateFilter.formatted(filters[1]), pageable);
+            case 3 -> repository.findMembersByFilters(templateFilter.formatted(filters[0]), templateFilter.formatted(filters[1]), templateFilter.formatted(filters[2]), pageable);
+            default -> repository.findMembersByFilters(templateFilter.formatted(filters[0]), templateFilter.formatted(filters[1]), templateFilter.formatted(filters[2]), templateFilter.formatted(filters[3]), pageable);
+        };
         List<MemberNksoPayloadResponse> members = page.getContent()
                 .stream()
                 .map(MemberNksoPayloadResponse::new)
@@ -75,7 +84,7 @@ public class MemberNksoService {
                 createMemberNksoPayload.setTextDateAddedToRegistry(createMemberNksoPayload.getDateAddedToRegistry().format(formatter));
             }
             if (createMemberNksoPayload.getFullTextDateAddedToRegistry() == null || createMemberNksoPayload.getFullTextDateAddedToRegistry().isEmpty()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("«dd» MMMM yyyy года");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("\"dd\" MMMM yyyy года");
                 createMemberNksoPayload.setFullTextDateAddedToRegistry(createMemberNksoPayload.getDateAddedToRegistry().format(formatter));
             }
         }
@@ -90,7 +99,7 @@ public class MemberNksoService {
         existing.setRegistryNum(registryNum);
         if (existing.getDateAddedToRegistry() != null) {
             DateTimeFormatter f1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            DateTimeFormatter f2 = DateTimeFormatter.ofPattern("«dd» MMMM yyyy года");
+            DateTimeFormatter f2 = DateTimeFormatter.ofPattern("\"dd\" MMMM yyyy года");
             existing.setTextDateAddedToRegistry(existing.getDateAddedToRegistry().format(f1));
             existing.setFullTextDateAddedToRegistry(existing.getDateAddedToRegistry().format(f2));
         }
