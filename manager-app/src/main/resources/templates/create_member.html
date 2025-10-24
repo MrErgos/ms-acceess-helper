@@ -14,7 +14,7 @@
 <main>
     <h2 th:text="#{member.create}">Создание нового члена НКСО</h2>
     <div th:if="${saveIsSuccessful}" class="toast show" style="background-color:#4caf50;">
-        ✅ Изменения сохранены!
+        Изменения сохранены!
     </div>
     <form th:action="@{/members/create}"
           th:object="${member}"

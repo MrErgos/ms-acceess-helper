@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return input;
     };
 
-    // 🔔 Универсальная функция показа тоста
     const showToast = (message, type = "success") => {
         let toast = document.getElementById("toast");
         if (!toast) {

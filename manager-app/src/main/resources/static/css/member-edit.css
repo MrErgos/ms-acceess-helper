@@ -1,13 +1,8 @@
-
-
-/* Контейнер для ячейки с полем ввода */
 .member-details td.form-cell {
-    /* Уменьшаем отступы, чтобы input и ошибка поместились */
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
 }
 
-/* Стилизация подсказки '?' */
 .member-details th .hint {
     display: inline-block;
     width: 1.3rem;
@@ -21,15 +16,14 @@
     font-size: 0.85rem;
     margin-left: 0.5rem;
     cursor: help;
-    position: relative; /* Для всплывающей подсказки */
+    position: relative;
     vertical-align: middle;
 }
 
-/* Простая CSS-подсказка при наведении */
 .member-details th .hint:hover::after {
     content: attr(data-hint);
     position: absolute;
-    bottom: 125%; /* Появляется над '?' */
+    bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--color-mahogany);
@@ -37,27 +31,25 @@
     padding: 0.6rem 0.8rem;
     border-radius: var(--radius);
     font-size: 0.9rem;
-    font-weight: 400; /* Обычный шрифт для подсказки */
-    width: 280px; /* Ширина подсказки */
+    font-weight: 400;
+    width: 280px;
     text-align: left;
     z-index: 10;
-    white-space: normal; /* Позволяет перенос текста */
+    white-space: normal;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Стилизация текста ошибки валидации */
 .error-message {
-    color: #b33a3a; /* Более темный красный */
+    color: #b33a3a;
     font-size: 0.9rem;
     font-weight: 500;
     margin-top: 0.5rem;
-    margin-bottom: 0; /* Убираем лишний отступ */
+    margin-bottom: 0;
 }
 
-/* Стилизация поля ввода с ошибкой */
 .inline-input.input-error {
     border-color: #b33a3a;
-    background-color: #fff2f2; /* Легкий красный фон */
+    background-color: #fff2f2;
 }
 
 .inline-input.input-error:focus {
@@ -65,7 +57,6 @@
     box-shadow: 0 0 5px rgba(179, 58, 58, 0.4);
 }
 
-/* Стили для кнопок "Отмена" и "Сохранить" */
 .action-buttons .button-link.cancel {
     background-color: #888;
 }
@@ -73,7 +64,6 @@
     background-color: #666;
 }
 
-/* Делаем label в th блочным для лучшего выравнивания с hint */
 .member-details th label {
     display: inline-block;
     vertical-align: middle;

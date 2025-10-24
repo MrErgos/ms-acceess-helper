@@ -14,7 +14,7 @@
 <main>
     <h2 th:text="#{member.edit}+ ' ' + ${member.firstname + ' ' + member.lastname}">Редактирование Имя Фамилия</h2>
     <div th:if="${saveIsSuccessful}" class="toast show" style="background-color:#4caf50;">
-        ✅ Изменения сохранены!
+        Изменения сохранены!
     </div>
     <form th:action="@{/members/{registryNum}/edit(registryNum=${member.registryNum})}"
           th:object="${member}"
