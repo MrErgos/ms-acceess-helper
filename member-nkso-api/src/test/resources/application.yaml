@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:ucanaccess://M:/project/ms-acceess-helper-parent/member-nkso-api/src/test/resources/bd_nkso.accdb;ignoreCase=true;skipLinkedTables=true;memory=false
+    driver-class-name: net.ucanaccess.jdbc.UcanaccessDriver
+    username:
+    password:
+    hikari:
+      auto-commit: true
+      max-lifetime: 30000
+      leak-detection-threshold: 10000
+  jpa:
+    hibernate:
+      globally_quoted_identifiers: false
+      auto_quote_keyword: false
+      ddl-auto: none
+    show-sql: true
+    database-platform: io.github.mrergos.dialect.MSAccessBracketDialect
