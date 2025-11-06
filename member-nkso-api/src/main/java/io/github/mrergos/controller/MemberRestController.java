@@ -7,24 +7,18 @@ import io.github.mrergos.controller.payload.response.PageResponse;
 import io.github.mrergos.service.MemberNksoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping(path = "member-nkso-api/members")
 @RequiredArgsConstructor
 public class MemberRestController {
     private final MemberNksoService service;
-    private final MessageSource messageSource;
 
     @GetMapping
     public PageResponse<MemberNksoPayloadResponse> getMembersPageByFilter(@RequestParam(value = "filter", required = false, defaultValue = "") String filter,
