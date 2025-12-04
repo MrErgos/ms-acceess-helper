@@ -6,11 +6,13 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class UpdateMemberNksoPayload {
     @NotNull(message = "{manager.member.creating.error.dateAddedToRegistry_is_required}")
     private LocalDate dateAddedToRegistry;

@@ -2,6 +2,23 @@ server:
   port: 8080
 
 spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/nkso-access-helper
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: nkso-access-helper-app
+            client-secret: PplLQKlUBnX22msc8iBikEwFgIfWjuvO
+            scope:
+              - openid
+              - edit_members
+              - view_members
+              - microprofile-jwt
+
   messages:
     use-code-as-default-message: false
   devtools:

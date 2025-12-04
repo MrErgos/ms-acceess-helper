@@ -1,5 +1,9 @@
 spring:
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/nkso-access-helper
   application:
     name: ms-access-helper-manager-app
   datasource:
@@ -19,15 +23,18 @@ spring:
     show-sql: true
     database-platform: io.github.mrergos.dialect.MSAccessBracketDialect
     properties:
+#      jakarta.persistence.metamodel.helper.enabled: false
+#      hibernate.hbm2ddl.auto: none # Уже установлено, но на всякий случай
+#      hibernate.metadata.extractors.delegate: false # Отключает извлечение метаданных
       hibernate.globally_quoted_identifiers: false
       hibernate.auto_quote_keyword: false
       hibernate:
+#        packagesToScan: io.github.mrergos.entity
         dialect: io.github.mrergos.dialect.MSAccessBracketDialect
 server:
   port: 8081
 logging:
   level:
-    web: debug
     org:
       hibernate:
         SQL: DEBUG
