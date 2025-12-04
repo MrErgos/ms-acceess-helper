@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.client.RestClient;
 
+import static org.springframework.security.oauth2.client.web.client.RequestAttributeClientRegistrationIdResolver.clientRegistrationId;
+
 @Slf4j
 @RequiredArgsConstructor
 public class MembersRestClient implements MemberClient {
@@ -44,6 +46,7 @@ public class MembersRestClient implements MemberClient {
                 .uri("/member-nkso-api/members")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(member)
+                .attributes(clientRegistrationId("keycloak"))
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, ((request, response) -> {
                     ProblemDetail problemDetail = objectMapper.readValue(response.getBody(), ProblemDetail.class);
@@ -58,6 +61,7 @@ public class MembersRestClient implements MemberClient {
                 .uri("/member-nkso-api/members/{registryNum}", member.getRegistryNum())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(member)
+                .attributes(clientRegistrationId("keycloak"))
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, ((request, response) -> {
                     ProblemDetail problemDetail = objectMapper.readValue(response.getBody(), ProblemDetail.class);
