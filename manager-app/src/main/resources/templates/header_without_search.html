@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
@@ -20,8 +20,18 @@
         <li>
             <a th:href="@{/members}" th:text="#{header.members}">Члены</a>
         </li>
-        <li>
+        <li sec:authorize="isAuthenticated()">
             <a th:href="@{/members/create}" th:text="#{header.create_member}">Создать нового члена</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post" class="logout-form">
+                <button type="submit" th:text="#{header.logout}">Выйти</button>
+            </form>
+        </li>
+        <li sec:authorize="isAnonymous()">
+            <form th:action="@{/oauth2/authorization/keycloak}" method="post" class="login-form">
+                <button type="submit" th:text="#{header.login}">Войти</button>
+            </form>
         </li>
     </ul>
 </nav>
