@@ -15,9 +15,9 @@
 
     <form th:action="@{/members}" method="get" class="filter-form">
         <label>
-            <input type="text" name="filter" th:value="${filter}" placeholder="Поиск по реестру">
+            <input type="text" name="filter" th:value="${filter}" th:placeholder="#{members.filter.placeholder}">
         </label>
-        <button type="submit">Поиск</button>
+        <button type="submit" th:text="#{members.filter.button}">Поиск</button>
     </form>
 
     <div class="table-wrapper">

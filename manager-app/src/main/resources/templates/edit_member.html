@@ -605,9 +605,9 @@
             </table>
         </div>
         <div class="action-buttons">
-            <button type="submit" class="button-link save">Сохранить</button>
+            <button type="submit" class="button-link save" th:text="#{member.edit.save}">Сохранить</button>
             <a th:href="@{/members/{registryNum}(registryNum=${member.registryNum})}"
-               class="button-link cancel">Отмена</a>
+               class="button-link cancel" th:text="#{member.edit.cancel}">Отмена</a>
         </div>
     </form>
 </main>

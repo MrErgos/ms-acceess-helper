@@ -11,7 +11,7 @@
 <body>
 <div th:insert="~{header :: header}"></div>
 <main>
-    <h2>Информация о члене НКСО</h2>
+    <h2 th:text="#{member.view.info}">Информация о члене НКСО</h2>
     <div class="table-wrapper">
         <table th:object="${member}" class="member-details" th:data-save-success="${saveIsSuccessful}">
             <tbody>
@@ -189,7 +189,7 @@
         </table>
     </div>
     <div class="action-buttons">
-        <a th:href="@{'/members/' + ${member.registryNum} + '/edit'}" class="button-link">
+        <a th:href="@{'/members/' + ${member.registryNum} + '/edit'}" class="button-link" th:text="#{member.view.edit}">
             Редактировать
         </a>
     </div>
