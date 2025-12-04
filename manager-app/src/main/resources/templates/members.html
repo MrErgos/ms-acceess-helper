@@ -120,7 +120,7 @@
         <a th:if="${!membersPage.first}"
            th:href="@{/members(page=${membersPage.number - 1}, filter=${filter})}"
            th:text="'&laquo;'+ #{members.pagination.previous}">&laquo; Назад</a>
-        <span>Страница <span th:text="${membersPage.number + 1}"></span> из <span
+        <span th:text="#{membersPage.page}">Страница <span th:text="${membersPage.number + 1}"></span> из <span
                 th:text="${membersPage.totalPages}"></span></span>
         <a th:if="${!membersPage.last}"
            th:href="@{/members(page=${membersPage.number + 1}, filter=${filter})}"
