@@ -10,7 +10,6 @@ import io.github.mrergos.entity.MemberNkso;
 import io.github.mrergos.repository.MemberNksoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +22,6 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@PropertySource("classpath:page.yaml")
 public class MemberNksoService {
     private final MemberNksoRepository repository;
     private final Environment environment;
@@ -93,7 +91,7 @@ public class MemberNksoService {
 
     public MemberNksoPayloadResponse update(UpdateMemberNksoPayload updateMemberNksoPayload, String registryNum) {
         MemberNkso existing = repository.findById(registryNum)
-                .orElseThrow(() -> new MemberNotFoundException("{manager.member.updating.error.member_does_not_exist}", updateMemberNksoPayload, registryNum));
+                .orElseThrow(() -> new MemberNotFoundException("manager.member.updating.error.member_does_not_exist", updateMemberNksoPayload, registryNum));
 
         BeanUtils.copyProperties(updateMemberNksoPayload.toMemberNkso(), existing);
         existing.setRegistryNum(registryNum);

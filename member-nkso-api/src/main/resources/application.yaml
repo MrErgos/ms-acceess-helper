@@ -31,6 +31,7 @@ spring:
       hibernate:
 #        packagesToScan: io.github.mrergos.entity
         dialect: io.github.mrergos.dialect.MSAccessBracketDialect
+page.size: 10
 server:
   port: 8081
 logging:
