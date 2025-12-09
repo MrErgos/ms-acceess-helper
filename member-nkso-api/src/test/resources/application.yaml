@@ -15,3 +15,4 @@ spring:
       ddl-auto: none
     show-sql: true
     database-platform: io.github.mrergos.dialect.MSAccessBracketDialect
+page.size: 2
