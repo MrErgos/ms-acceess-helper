@@ -2,6 +2,7 @@ package io.github.mrergos.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mrergos.client.MembersRestClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -12,10 +13,12 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class ClientBeans {
     @Bean
-    public MembersRestClient membersRestClient(ObjectMapper objectMapper, OAuth2AuthorizedClientManager oAuth2AuthorizedClientManager) {
+    public MembersRestClient membersRestClient(ObjectMapper objectMapper,
+                                               OAuth2AuthorizedClientManager oAuth2AuthorizedClientManager,
+                                               @Value("${nkso.api.uri:8081:http://localhost:8081}") String uri) {
         OAuth2ClientHttpRequestInterceptor interceptor = new OAuth2ClientHttpRequestInterceptor(oAuth2AuthorizedClientManager);
         return new MembersRestClient(RestClient.builder()
-                .baseUrl("http://localhost:8081")
+                .baseUrl(uri)
                 .messageConverters(converter -> {
                     converter.removeIf(MappingJackson2HttpMessageConverter.class::isInstance);
                     converter.add(new MappingJackson2HttpMessageConverter(objectMapper));
