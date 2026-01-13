@@ -1,0 +1,52 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.6
+    container_name: keycloak
+    command: start-dev --import-realm
+    environment:
+    - KC_HEALTH_ENABLED=true
+    - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+    - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+    - KC_HTTP_PORT=8082
+    volumes:
+      - ./keycloak/import:/opt/keycloak/data/import
+    healthcheck:
+      test: ["CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000; exit $?"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    ports:
+      - "8082:8082"
+
+  member-api:
+    build:
+      context: .
+      dockerfile: member-nkso-api/Dockerfile
+    container_name: member-api
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./database:/app/data
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:ucanaccess:///app/data/bd_nkso.accdb;memory=false
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8082/realms/nkso-access-helper
+    depends_on:
+      keycloak:
+        condition: service_healthy
+
+  manager-app:
+    build:
+      context: .
+      dockerfile: manager-app/Dockerfile
+    container_name: manager-app
+    ports:
+      - "8080:8080"
+    environment:
+      - MEMBER_API_URL=http://member-api:8081
+      - SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI=http://keycloak:8082/realms/nkso-access-helper
+    depends_on:
+      keycloak:
+        condition: service_healthy
+      member-api:
+        condition: service_started
